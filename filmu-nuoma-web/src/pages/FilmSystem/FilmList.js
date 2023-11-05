@@ -1,7 +1,12 @@
+import React from "react";
+import VideoPlayer from './VideoPlayer.js'
 function FilmList() {
+
     return (
+
         <body>
         <h2>Film List Works!</h2>
+        <VideoPlayer videoId={'dQw4w9WgXcQ'} width="560" height="315" />
         <table>
             <tr>
                 <th>Company</th>
