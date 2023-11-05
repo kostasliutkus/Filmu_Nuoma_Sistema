@@ -1,7 +1,7 @@
 function FilmList() {
     return (
         <body>
-        <h2>HTML Table</h2>
+        <h2>Film List Works!</h2>
         <table>
             <tr>
                 <th>Company</th>
