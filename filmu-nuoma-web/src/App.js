@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import OrderList from "./pages/OrderSystem/Order.js";
 import Review from "./pages/ReviewSystem/Review";
 import Profile from "./pages/ClientSystem/Profile.js";
+import FilmView from "./pages/FilmSystem/FilmView.js"
 import "./App.css"
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/OrderList" element ={<OrderList/>}/>
           <Route path="/Reviews" element ={<Review/>}/>
           <Route path="/Profile" element ={<Profile/>}/>
+          <Route path="/film-view/:id" element={<FilmView/>} />
       </Routes>
       </>
   );

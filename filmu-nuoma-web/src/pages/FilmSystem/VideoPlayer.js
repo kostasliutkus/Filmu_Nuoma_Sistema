@@ -1,4 +1,3 @@
-// VideoPlayer.js
 import React from 'react';
 
 const VideoPlayer = ({ videoId, width, height }) => {

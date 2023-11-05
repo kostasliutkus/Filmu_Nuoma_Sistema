@@ -1,0 +1,49 @@
+tr:hover {
+    background-color: midnightblue;
+    cursor: pointer;
+}
+table tbody tr:hover td {
+    color: white; /* This will set the text color for all cells in the hovered row */
+}
+
+tr {
+    background-color: black;
+    margin-bottom: 5px;
+}
+table th,
+table td {
+    color: grey; /* Replace with your desired color */
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0 0px; /* Horizontal and vertical spacing */
+}
+tr > td {
+    padding: 10px; /* Adjust the padding as needed */
+    /*border-top: 5px solid #444;*/
+    /*border-bottom: 5px solid #444;*/
+}
+/* If you want a border around the cells that looks continuous, you'll need to adjust for separate border-collapse: */
+td, th {
+    border-top: 1px solid #0c0f21; /* Example border */
+    border-bottom: 1px solid #0c0f21;
+    border-style: wave;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color:#0c0f21;
+}
+
+/* Ensure the div takes up all available space */
+.full-page-div {
+    width: 100%;
+    height: 100%;
+    background-color:#0c0f21;
+    /* Add any additional styles you need for your div */
+}
+h2 {
+    color:grey;
+}

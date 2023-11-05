@@ -1,48 +1,40 @@
 import React from "react";
-import VideoPlayer from './VideoPlayer.js'
+import './FilmStyle.css';
+import {useNavigate} from 'react-router-dom'
 function FilmList() {
+    const navigate = useNavigate();
 
+    const handleRowClick = (id) => {
+        navigate(`/film-view/${id}`);
+    };
     return (
 
         <body>
         <h2>Film List Works!</h2>
-        <VideoPlayer videoId={'dQw4w9WgXcQ'} width="560" height="315" />
+
         <table>
+            <thead>
             <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
+                <th>Movie Name</th>
+                <th>Director</th>
+                <th>Main Actor</th>
+                <th>Length</th>
             </tr>
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
+            </thead>
+            <tbody>
+            <tr onClick={() => handleRowClick('dQw4w9WgXcQ')}>
+                <td>Never Gonna Give You Up</td>
+                <td>Rick Astley</td>
+                <td>Rick Astley</td>
+                <td>3:32</td>
             </tr>
-            <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
+            <tr onClick={() => handleRowClick('jDNBOy6UE1g')}>
+                <td>BASE RACE INCIDENT</td>
+                <td>Thebausffs</td>
+                <td>Thebausffs</td>
+                <td>15:28</td>
             </tr>
-            <tr>
-                <td>Ernst Handel</td>
-                <td>Roland Mendel</td>
-                <td>Austria</td>
-            </tr>
-            <tr>
-                <td>Island Trading</td>
-                <td>Helen Bennett</td>
-                <td>UK</td>
-            </tr>
-            <tr>
-                <td>Laughing Bacchus Winecellars</td>
-                <td>Yoshi Tannamuri</td>
-                <td>Canada</td>
-            </tr>
-            <tr>
-                <td>Magazzini Alimentari Riuniti</td>
-                <td>Giovanni Rovelli</td>
-                <td>Italy</td>
-            </tr>
+            </tbody>
         </table>
 
         </body>
