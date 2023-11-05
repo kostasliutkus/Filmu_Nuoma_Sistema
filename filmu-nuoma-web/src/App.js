@@ -7,6 +7,7 @@ import OrderList from "./pages/OrderSystem/Order.js";
 import Review from "./pages/ReviewSystem/Review";
 import Profile from "./pages/ClientSystem/Profile.js";
 import "./App.css"
+import VideoPlayer from './pages/FilmSystem/VideoPlayer.js'
 function App() {
   return (
       <>
@@ -19,6 +20,9 @@ function App() {
               <li><Link to="/Profile">Profile</Link></li>
           </ul>
           </nav>
+          <div>
+              <VideoPlayer videoId={'dQw4w9WgXcQ'} width="560" height="315" />
+          </div>
       <Routes>
           <Route path="/" element ={<HomePage/>}/>
           <Route path="/FilmList" element ={<FilmList/>}/>
