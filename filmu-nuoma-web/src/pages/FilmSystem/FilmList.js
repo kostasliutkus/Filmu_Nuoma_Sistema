@@ -8,8 +8,8 @@ function FilmList() {
         navigate(`/film-view/${id}`);
     };
     return (
-
-        <body>
+        <html className="film-html">
+        <body className="film-body">
         <h2>Film List Works!</h2>
 
         <table>
@@ -38,6 +38,8 @@ function FilmList() {
         </table>
 
         </body>
+        </html>
+
     );
 }
 export default FilmList

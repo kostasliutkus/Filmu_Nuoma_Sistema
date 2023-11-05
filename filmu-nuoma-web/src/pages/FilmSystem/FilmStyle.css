@@ -12,32 +12,29 @@ tr {
 }
 table th,
 table td {
-    color: grey; /* Replace with your desired color */
+    color: grey;
 }
 table {
     border-collapse: separate;
-    border-spacing: 0 0px; /* Horizontal and vertical spacing */
+    border-spacing: 0 0;
 }
 tr > td {
-    padding: 10px; /* Adjust the padding as needed */
-    /*border-top: 5px solid #444;*/
-    /*border-bottom: 5px solid #444;*/
+    padding: 10px;
 }
-/* If you want a border around the cells that looks continuous, you'll need to adjust for separate border-collapse: */
-td, th {
-    border-top: 1px solid #0c0f21; /* Example border */
-    border-bottom: 1px solid #0c0f21;
-    border-style: wave;
-}
-html, body {
+.film-body{
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     background-color:#0c0f21;
 }
-
-/* Ensure the div takes up all available space */
+.film-html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color:#0c0f21;
+}
 .full-page-div {
     width: 100%;
     height: 100%;
