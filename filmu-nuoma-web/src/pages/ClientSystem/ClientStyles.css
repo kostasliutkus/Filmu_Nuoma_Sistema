@@ -1,0 +1,15 @@
+.btn{
+    margin-right: 20px;
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+.btn:hover{
+    background-color: #575252;
+    color: white;
+}
+
+.card-text{
+    font-weight: bold;
+    font-size: 120%;
+}

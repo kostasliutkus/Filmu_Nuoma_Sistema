@@ -47,6 +47,10 @@ li {
   float: left;
 }
 
+.profile {
+  float: right;
+}
+
 li a {
   display: block;
   color: white;
@@ -54,5 +58,7 @@ li a {
   padding: 14px 16px;
   text-decoration: none;
 }
+
+
 
 
