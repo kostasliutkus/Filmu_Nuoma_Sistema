@@ -1,5 +1,5 @@
 import React from "react";
-import './OrderStyle.css';
+import '../FilmSystem/FilmStyle.css';
 import {useNavigate} from 'react-router-dom'
 function OrderList() {
     const navigate = useNavigate();
@@ -8,8 +8,8 @@ function OrderList() {
         navigate(`/EditOrder/${id}`);
     };
     return (
-        <html className="order-html">
-        <body className="order-body">
+        <html className="film-html">
+        <body className="film-body">
             
             <h2>HTML Table</h2>
             <table>
