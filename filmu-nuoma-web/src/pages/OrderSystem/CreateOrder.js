@@ -8,7 +8,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import '../FilmSystem/FilmStyle.css';
 
 function CreateOrder() {
     const [startDate, setStartDate] = useState(null);
@@ -52,8 +51,10 @@ function CreateOrder() {
         navigate(`/FilmList`);
     };
     return (
+        <html className="film-html">
         <body className="order-body">
             <div className="full-page-div-order">
+                <table>
                 <thead>
                     <tr>
                         <th>Starting date</th>
@@ -98,9 +99,12 @@ function CreateOrder() {
                         </td>
                     </tr>
                     <tr onClick={() => navigate(`/film-view/${id}`)}>
-                        Watch movie
+                        <td>Watch movie</td>
+                        
                     </tr>
                 </tbody>
+                </table>
+                
             </div>
 
             {/* Rent Dialog */}
@@ -145,6 +149,7 @@ function CreateOrder() {
                 </DialogActions>
             </Dialog>
         </body>
+        </html>
     );
 }
 

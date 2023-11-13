@@ -1,5 +1,4 @@
 import React from "react";
-import './FilmStyle.css';
 import {useNavigate} from 'react-router-dom'
 function FilmList() {
     const navigate = useNavigate();
