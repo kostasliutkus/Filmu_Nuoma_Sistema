@@ -73,7 +73,7 @@ function CreateOrder() {
                         </td>
                         <td>
                             <DatePicker
-                                selected={new Date("2002-12-16")}
+                                selected={endDate}
                                 onChange={handleEndDateChange}
                                 dateFormat="dd/MM/yyyy"
                             />
@@ -94,11 +94,6 @@ function CreateOrder() {
                                 Cancel
                             </Button>
                         </td>
-                    </tr>
-                    <tr onClick={() => navigate(`/film-view/${id}`)}>
-                    <th>
-                        Watch movie
-                        </th>
                     </tr>
                 </tbody>
                 </table>
