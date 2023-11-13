@@ -1,7 +1,12 @@
 import React from "react";
 import './OrderStyle.css';
+import {useNavigate} from 'react-router-dom'
 function OrderList() {
+    const navigate = useNavigate();
 
+    const handleRowClick = (id) => {
+        navigate(`/EditOrder/${id}`);
+    };
     return (
         <html className="order-html">
         <body className="order-body">
@@ -16,9 +21,14 @@ function OrderList() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr onClick={() => handleRowClick('1')}>
                         <td>BASE RACE INCIDENT</td>
                         <td>69</td>
+                        <td>Admin</td>
+                    </tr>
+                    <tr onClick={() => handleRowClick('2')}>
+                        <td>Never Gonna Give You Up</td>
+                        <td>14</td>
                         <td>Admin</td>
                     </tr>
                 </tbody>

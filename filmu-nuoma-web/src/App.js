@@ -5,6 +5,7 @@ import {Link,Route,Routes } from 'react-router-dom';
 import HomePage from "./pages/HomePage";
 import OrderList from "./pages/OrderSystem/OrderList.js";
 import CreateOrder from "./pages/OrderSystem/CreateOrder.js";
+import EditOrder from "./pages/OrderSystem/EditOrder.js";
 import Review from "./pages/ReviewSystem/Review";
 import Profile from "./pages/ClientSystem/Profile.js";
 import FilmView from "./pages/FilmSystem/FilmView.js"
@@ -32,7 +33,8 @@ function App() {
           <Route path="/Reviews" element ={<Review/>}/>
           <Route path="/Profile" element ={<Profile/>}/>
           <Route path="/Order/:id" element={<CreateOrder/>} />
-           <Route path="/film-view/:id" element={<FilmView/>} /> 
+          <Route path="/EditOrder/:id" element={<EditOrder/>} />
+            <Route path="/film-view/:id" element={<FilmView/>} /> 
       </Routes>
       </>
   );
