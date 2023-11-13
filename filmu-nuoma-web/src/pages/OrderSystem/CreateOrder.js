@@ -43,11 +43,14 @@ function CreateOrder() {
 
     const handleCloseCancelDialog = () => {
         setOpenCancelDialog(false);
+        returnToList();
     };
 
     const navigate = useNavigate();
     const { id } = useParams();
-
+    const returnToList = () => {
+        navigate(`/FilmList`);
+    };
     return (
         <body className="order-body">
             <div className="full-page-div-order">
