@@ -20,6 +20,9 @@ const FilmView = () => {
     const clickAddReview = () => {
         navigate(`/AddReview`);
     };
+    const clickEditReview = () => {
+        navigate(`/EditReview`);
+    };
 
     return (
         <body>
@@ -148,7 +151,10 @@ const FilmView = () => {
                                 <Box sx={{ bgcolor: '#c5cae9' }}> MORE</Box>                
                             </Box>
                             <br></br><br></br>
-                            <Button size="large" onClick={() => clickAddReview()}>Add review</Button>
+                            <Stack direction="row" spacing={5}>
+                                <Button size="large" onClick={() => clickAddReview()}>Add review</Button>
+                                <Button size="large" onClick={() => clickEditReview()}>Edit review</Button>
+                            </Stack>                            
                         </div>
                     
                     </Stack> 
