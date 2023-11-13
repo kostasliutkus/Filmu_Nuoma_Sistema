@@ -1,9 +1,15 @@
 import React from "react";
-import  {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import VideoPlayer  from './VideoPlayer.js'
 import './FilmStyle.css'
+
 const FilmView = () => {
+    const navigate = useNavigate();
     const {id} = useParams();
+    const goToReviews = () => {
+        navigate(`/Reviews`);
+    };
+
     return (
         <body>
             <div className="encased-div">
@@ -14,6 +20,7 @@ const FilmView = () => {
                 <div className="grid-item">
                     <table className="recommendation-table">
                         <thead className="recommendation-thead">
+                        <h1>Recommendations</h1>
                         <tr>
                             <th>Movie Name</th>
                             <th>Director</th>
@@ -39,8 +46,12 @@ const FilmView = () => {
                 </div>
 
                 <div className="grid-item">
-                    <div><h2>Reviews</h2></div>
-                    <div><button>Reviews</button></div>
+                    <div>
+                        <h2>Reviews</h2>
+                    </div>
+                    <div>
+                        <button onClick={(goToReviews)}>Add a review</button>
+                    </div>
                 </div>
 
             </div>

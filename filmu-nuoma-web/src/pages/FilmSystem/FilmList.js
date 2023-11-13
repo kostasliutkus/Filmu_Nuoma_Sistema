@@ -2,10 +2,16 @@ import React from "react";
 import {useNavigate} from 'react-router-dom'
 function FilmList() {
     const navigate = useNavigate();
-
+    const goToEdit = () => {
+        navigate(`/EditFilm`);
+    };
+    const goToAdd = () => {
+        navigate(`/AddFilm`);
+    };
     const handleRowClick = (id) => {
         navigate(`/film-view/${id}`);
     };
+
     const handleOrder = (id) => {
         navigate(`/Order/${id}`);
     };
@@ -45,7 +51,17 @@ function FilmList() {
             <td><button onClick={() =>handleOrder('jDNBOy6UE1g') }>Rent Movie</button></td>
             </tbody>
         </table>
-
+        <div className="grid-item">
+            <div>
+                <h2>Film managmenet</h2>
+            </div>
+            <div>
+                <button onClick={(goToAdd)}>Add a film</button>
+            </div>
+            <div>
+                <button onClick={(goToEdit)}>Edit a film</button>
+            </div>
+        </div>
         </body>
         </html>
 
