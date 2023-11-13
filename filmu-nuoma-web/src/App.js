@@ -8,6 +8,8 @@ import OrderList from "./pages/OrderSystem/OrderList.js";
 import CreateOrder from "./pages/OrderSystem/CreateOrder.js";
 import EditOrder from "./pages/OrderSystem/EditOrder.js";
 import Review from "./pages/ReviewSystem/Review";
+import EditReview from "./pages/ReviewSystem/EditReview";
+import AddReview from "./pages/ReviewSystem/AddReview";
 import Profile from "./pages/ClientSystem/Profile.js";
 import FilmView from "./pages/FilmSystem/FilmView.js"
 import AddFilm from "./pages/FilmSystem/AddFilm.js"
@@ -26,7 +28,6 @@ function App() {
               {/*<li><Link to="/">Home</Link></li>*/}
               <li><Link to="/FilmList">Films</Link></li>
               <li><Link to="/OrderList">Orders</Link></li>
-              <li><Link to="/Profile">Profile</Link></li>
               <li className='profile'><Link to="/Profile">Profile</Link></li>
               <li className='profile'><Link to="/RegLog">Register/Login</Link></li>
           </ul>
@@ -38,7 +39,9 @@ function App() {
           <Route path="/" element ={<HomePage/>}/>
           <Route path="/FilmList" element ={<FilmList/>}/>
           <Route path="/OrderList" element ={<OrderList/>}/>
-          <Route path="/Reviews" element ={<Review/>}/>
+          <Route path="/Review" element ={<Review/>}/>
+          <Route path="/EditReview" element ={<EditReview/>}/>
+          <Route path="/AddReview" element ={<AddReview/>}/>
           <Route path="/Profile" element ={<Profile/>}/>
           <Route path="/RegLog" element ={<RegLog/>}/>
           <Route path="/Register" element ={<Register/>}/>

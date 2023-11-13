@@ -5,7 +5,7 @@ function Profile()
 {
     const navigate = useNavigate()
 
-    const [userData, setUserData] = useState({
+    const [userData] = useState({
         username: 'john_doe',
         name: 'John',
         lastName: 'Doe',
