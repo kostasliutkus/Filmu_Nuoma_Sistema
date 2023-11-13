@@ -6,6 +6,8 @@ const FilmView = () => {
     return (
         <div>
             <VideoPlayer videoId={id} width="560" height="315" />
+            <div><h2>Reviews</h2></div>
+            <div><button>Reviews</button></div>
         </div>
     );
 };
