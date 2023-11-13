@@ -11,6 +11,7 @@ import Profile from "./pages/ClientSystem/Profile.js";
 import FilmView from "./pages/FilmSystem/FilmView.js"
 import AddFilm from "./pages/FilmSystem/AddFilm.js"
 import EditFilm from "./pages/FilmSystem/EditFilm.js"
+import CreateInvoice from "./pages/OrderSystem/CreateInvoice.js"
 import "./App.css"
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             <Route path="/film-view/:id" element={<FilmView/>} />
           <Route path="/AddFilm" element={<AddFilm/>} />
           <Route path="/EditFilm" element={<EditFilm/>} />
+          <Route path="/CreateInvoice" element={<CreateInvoice/>} />
       </Routes>
       </>
   );

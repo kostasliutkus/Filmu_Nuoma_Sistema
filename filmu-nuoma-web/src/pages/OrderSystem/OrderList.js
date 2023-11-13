@@ -7,6 +7,9 @@ function OrderList() {
     const handleRowClick = (id) => {
         navigate(`/EditOrder/${id}`);
     };
+    const goToCreateInvoice = () => {
+        navigate(`/CreateInvoice`);
+    };
     return (
         <html className="film-html">
         <body className="film-body">
@@ -26,11 +29,13 @@ function OrderList() {
                         <td>69</td>
                         <td>Admin</td>
                     </tr>
+                    <tr><button onClick={(goToCreateInvoice)}>Create Invoice</button></tr>
                     <tr onClick={() => handleRowClick('2')}>
                         <td>Never Gonna Give You Up</td>
                         <td>14</td>
                         <td>Admin</td>
                     </tr>
+                    <tr><button onClick={(goToCreateInvoice)}>Create Invoice</button></tr>
                 </tbody>
 
 
