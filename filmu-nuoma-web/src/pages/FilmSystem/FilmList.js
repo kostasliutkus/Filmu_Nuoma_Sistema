@@ -53,7 +53,7 @@ function FilmList() {
         </table>
         <div className="grid-item">
             <div>
-                <h2>Film managmenet</h2>
+                <h2>Film management</h2>
             </div>
             <div>
                 <button onClick={(goToAdd)}>Add a film</button>

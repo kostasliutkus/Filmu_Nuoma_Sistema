@@ -14,7 +14,7 @@ function OrderList() {
         <html className="film-html">
         <body className="film-body">
             
-            <h2>HTML Table</h2>
+            <h2>Movies</h2>
             <table>
                 <thead>
                     <tr>

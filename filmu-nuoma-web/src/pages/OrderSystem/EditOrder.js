@@ -91,7 +91,7 @@ function CreateOrder() {
                         </td>
                         <td>
                             <Button variant="outlined" onClick={handleCancelMovie}>
-                                Cancel
+                                Back
                             </Button>
                         </td>
                     </tr>
@@ -125,10 +125,10 @@ function CreateOrder() {
                 aria-labelledby="cancel-dialog-title"
                 aria-describedby="cancel-dialog-description"
             >
-                <DialogTitle id="cancel-dialog-title">Cancel Movie</DialogTitle>
+                <DialogTitle id="cancel-dialog-title">Go back</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="cancel-dialog-description">
-                        Are you sure you want to cancel the rental of the movie?
+                        Are you sure you want to leave ?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
