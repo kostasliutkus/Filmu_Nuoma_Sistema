@@ -1,25 +1,41 @@
 import React, { useState } from 'react';
 import {useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 function Register()
 {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        name: '',
-        surname: '',
-        phoneNumber: '',
-        email: '',
-        username: '',
-        password: '',
+        vardas: '',
+        pavarde: '',
+        telefonas: '',
+        el_pastas: '',
+        slapyvardis: '',
+        slaptazodis: '',
+        sukurimo_data: '',
       });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         
-        console.log('Form submitted:', formData);
-        navigate('/');
-      };
+        try {
+          const currentDate = new Date().toISOString().split('T')[0];
+          const formDataWithDate = {
+            ...formData,
+            sukurimo_data: currentDate,
+          };
+
+          console.log('Form submitted:', formDataWithDate);
+          await axios.post('http://localhost:5000/api/register', formDataWithDate);
+      
+          console.log('User registered successfully');
+          navigate('/'); 
+          
+        } catch (error) {
+          console.error('Registration failed:', error.message);
+        }
+    };
 
     const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +46,6 @@ function Register()
     };
 
     return(
-
         <div className="container mt-5">
           <h1 className="text-center mb-4">Registration Form</h1>
           <form onSubmit={handleSubmit}>
@@ -39,8 +54,8 @@ function Register()
               <input
                 type="text"
                 id="name"
-                name="name"
-                value={formData.name}
+                name="vardas"
+                value={formData.vardas}
                 className="form-control"
                 onChange={handleChange}
                 required
@@ -51,8 +66,8 @@ function Register()
               <input
                 type="text"
                 id="surname"
-                name="surname"
-                value={formData.surname}
+                name="pavarde"
+                value={formData.pavarde}
                 className="form-control"
                 onChange={handleChange}
                 required
@@ -63,8 +78,8 @@ function Register()
               <input
                 type="tel"
                 id="phoneNumber"
-                name="phoneNumber"
-                value={formData.phoneNumber}
+                name="telefonas"
+                value={formData.telefonas}
                 className="form-control"
                 onChange={handleChange}
                 required
@@ -75,8 +90,8 @@ function Register()
               <input
                 type="email"
                 id="email"
-                name="email"
-                value={formData.email}
+                name="el_pastas"
+                value={formData.el_pastas}
                 className="form-control"
                 onChange={handleChange}
                 required
@@ -87,8 +102,8 @@ function Register()
               <input
                 type="text"
                 id="username"
-                name="username"
-                value={formData.username}
+                name="slapyvardis"
+                value={formData.slapyvardis}
                 className="form-control"
                 onChange={handleChange}
                 required
@@ -99,8 +114,8 @@ function Register()
               <input
                 type="password"
                 id="password"
-                name="password"
-                value={formData.password}
+                name="slaptazodis"
+                value={formData.slaptazodis}
                 className="form-control"
                 onChange={handleChange}
                 required
