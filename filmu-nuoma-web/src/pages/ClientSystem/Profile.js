@@ -1,33 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from './AuthContext';
 
 function Profile()
 {
+    const { logout } = useAuth();
     const navigate = useNavigate()
 
-    const [userData] = useState({
-        username: 'john_doe',
-        name: 'John',
-        lastName: 'Doe',
-        phoneNumber: '123-456-7890',
-        email: 'john.doe@example.com',
-    });
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        // Function to fetch user data from your API
+        const token = localStorage.getItem('token')
+        const fetchUserData = async () => {
+          try {
+            const response = await fetch('http://localhost:5000/api/user-profile', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                });
+            const data = await response.json();
+            setUserData(data); // Assuming the API returns an object with user data
+          } catch (error) {
+            console.error('Error fetching user data:', error);
+          }
+        };
+    
+        fetchUserData();
+      }, []);
 
     const handleEditProfile = () => {
         navigate('/EditProfile')
     };
 
-    const handleDeleteProfile = () => {
-        navigate('/RegLog')
+    const handleDeleteProfile = async () => {
+        const token = localStorage.getItem('token');
+    try {
+      const response = await fetch('http://localhost:5000/api/delete-profile', {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      });
+
+      if (response.ok) {
+        console.log('Profile deleted successfully');
+        logout();
+        navigate('/RegLog'); // Redirect to login or registration page
+      } else {
+        console.error('Failed to delete profile:', response.status);
+      }
+    } catch (error) {
+      console.error('Error deleting profile:', error);
+    }
     };
 
     const handleGenerateReport = () => {
     };
-
-    const handleLogout = () => {
-        navigate('/RegLog')
-    };
-
     
     return (
     <div className="container mt-5">
@@ -47,12 +76,9 @@ function Profile()
                 <button className="btn" onClick={handleDeleteProfile}>
                     Delete Profile
                 </button>
-                <button className="btn" onClick={handleGenerateReport}>
+                {/*<button className="btn" onClick={handleGenerateReport}>
                     Generate Profile Report
-                </button>
-                <button className="btn" onClick={handleLogout}>
-                    Logout
-                </button>
+                </button>*/}
             </div>
         </div>
         </div>

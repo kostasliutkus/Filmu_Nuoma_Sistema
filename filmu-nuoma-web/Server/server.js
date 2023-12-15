@@ -2,12 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = 5000;
 
 app.use(bodyParser.json());
 app.use(cors());
+
+const secretKey = 'F8D3C71E8EA4E1A2CBA663272DBBA';
 
 const sequelize = new Sequelize('vezliukai', 'root', '', {
     host: 'localhost',
@@ -18,6 +21,7 @@ const User = sequelize.define('klientas', {
     vardas: DataTypes.STRING,
     pavarde: DataTypes.STRING,
     telefonas: DataTypes.STRING,
+    tipas: DataTypes.STRING,
     el_pastas: DataTypes.STRING,
     slapyvardis: DataTypes.STRING,
     slaptazodis: DataTypes.STRING,
@@ -43,6 +47,146 @@ app.post('/api/register', async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   });
+
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        // Find the user by username and password in the database
+        const user = await User.findOne({
+          where: {
+            slapyvardis: username,
+            slaptazodis: password,
+          },
+        });
+    
+        if (!user) {
+          return res.status(401).json({ message: 'Invalid credentials' });
+        }
+    
+        // Generate JWT token
+        const token = jwt.sign({ userId: user.id, username: user.slapyvardis, role: user.tipas, }, secretKey, { expiresIn: '1h' });
+    
+        res.json({ token });
+      } catch (error) {
+        console.error('Error during login:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    });
+
+app.get('/api/user-profile', async (req, res) => {
+    const authorizationHeader = req.headers.authorization;
+    if (!authorizationHeader) {
+        return res.status(401).json({ error: 'Authorization header is missing' });
+    }
+
+    const token = authorizationHeader.split(' ')[1];
+    
+    // Verify the JWT token
+    jwt.verify(token, secretKey, async (err, decoded) => {
+        if (err) {
+        return res.status(401).json({ error: 'Invalid token' });
+        }
+    
+        const userId = decoded.userId;
+    
+        try {
+        // Find the user in the database based on the ID from the token
+        const user = await User.findByPk(userId);
+    
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+    
+        // Return user profile data
+        res.json({
+            username: user.slapyvardis,
+            name: user.vardas,
+            lastName: user.pavarde,
+            phoneNumber: user.telefonas,
+            email: user.el_pastas,
+        });
+        } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+    });
+
+app.delete('/api/delete-profile', async (req, res) => {
+    const authorizationHeader = req.headers.authorization;
+    if (!authorizationHeader) {
+        return res.status(401).json({ error: 'Authorization header is missing' });
+    }
+
+    const token = authorizationHeader.split(' ')[1];
+
+    jwt.verify(token, secretKey, async (err, decoded) => {
+        if (err) {
+        return res.status(401).json({ error: 'Invalid token' });
+        }
+
+        const userId = decoded.userId;
+
+        try {
+            // Find the user by ID and delete the profile
+            const user = await User.findByPk(userId);
+        
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+        
+            await user.destroy();
+        
+            res.status(200).json({ message: 'Profile deleted successfully' });
+
+        } catch (error) {
+            console.error('Error deleting profile:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+    });
+
+
+app.put('/api/update-profile', (req, res) => {
+    
+    const authorizationHeader = req.headers.authorization;
+    if (!authorizationHeader) {
+        return res.status(401).json({ error: 'Authorization header is missing' });
+    }
+
+    const token = authorizationHeader.split(' ')[1];
+
+    jwt.verify(token, secretKey, async (err, decoded) => {
+        if (err) {
+        return res.status(401).json({ error: 'Invalid token' });
+        }
+
+        const userId = decoded.userId;
+
+        const updatedUserData = {
+            vardas: req.body.name,
+            pavarde: req.body.lastName,
+            telefonas: req.body.phoneNumber,
+            el_pastas: req.body.email,
+            slapyvardis: req.body.username
+          };
+
+        try {
+            const user = await User.findByPk(userId);
+
+            if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+            }
+            await user.update(updatedUserData);
+
+            res.sendStatus(200);
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+});
 
 app.listen(PORT, () => {
 console.log(`Server is running on port ${PORT}`);

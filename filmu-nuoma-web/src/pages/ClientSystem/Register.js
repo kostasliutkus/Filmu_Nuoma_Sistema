@@ -11,6 +11,7 @@ function Register()
         pavarde: '',
         telefonas: '',
         el_pastas: '',
+        tipas: 'vartotojas',
         slapyvardis: '',
         slaptazodis: '',
         sukurimo_data: '',

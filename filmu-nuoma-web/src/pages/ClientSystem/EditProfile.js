@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 const EditProfile = () => {
@@ -6,12 +6,32 @@ const EditProfile = () => {
     const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    username: 'john_doe',
-    name: 'John',
-    lastName: 'Doe',
-    phoneNumber: '123-456-7890',
-    email: 'john.doe@example.com',
+    username: '',
+    name: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
   });
+
+  useEffect(() => {
+    // Function to fetch user data from your API
+    const token = localStorage.getItem('token')
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/user-profile', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            });
+        const data = await response.json();
+        setFormData(data); // Assuming the API returns an object with user data
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,9 +41,29 @@ const EditProfile = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/Profile')
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/update-profile', {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Profile updated successfully');
+        navigate('/Profile');
+      } else {
+        console.error('Failed to update profile:', response.status);
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
 
   return (
@@ -47,7 +87,7 @@ const EditProfile = () => {
           <input
             type="text"
             id="surname"
-            name="surname"
+            name="lastName"
             value={formData.lastName}
             onChange={handleChange}
             className="form-control"
