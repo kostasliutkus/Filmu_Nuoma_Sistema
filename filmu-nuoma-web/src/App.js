@@ -24,12 +24,6 @@ import NavigationBar from './pages/NavBar';
 import { AuthProvider } from './pages/ClientSystem/AuthContext';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-  };
 
   return (
       <>
