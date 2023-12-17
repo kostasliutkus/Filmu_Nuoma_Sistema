@@ -34,7 +34,7 @@ router.get('/directors', async (req, res) => {
 });
 
 //get by id
-router.get('/director/:id', async (req, res) => {
+router.get('/directors/:id', async (req, res) => {
     const dirId = req.params.id;
     try {
       const director = await Director.findByPk(dirId);
@@ -48,7 +48,7 @@ router.get('/director/:id', async (req, res) => {
     }
 });
 //create director
-router.post('/director', async (req, res) => {
+router.post('/directors', async (req, res) => {
     try {
         if (!req.body) {
             return res.status(400).json({ error: 'Request body is missing or empty' });
@@ -69,7 +69,7 @@ router.post('/director', async (req, res) => {
 });
 
 // update director
-router.put('/director/:id', async (req, res) => {
+router.put('/directors/:id', async (req, res) => {
     const dirId = req.params.id;
     try {
       const directorToUpdate = await Director.findByPk(dirId);
@@ -94,7 +94,7 @@ router.put('/director/:id', async (req, res) => {
 });
 
 // delete director
-router.delete('/director/:id', async (req, res) => {
+router.delete('/directors/:id', async (req, res) => {
     const dirId = req.params.id;
     try {
       const directorToDelete = await Director.findByPk(dirId);

@@ -39,7 +39,7 @@ router.get('/movies', async (req, res) => {
 });
 
 //get by id
-router.get('/movie/:id', async (req, res) => {
+router.get('/movies/:id', async (req, res) => {
     const movieId = req.params.id;
     try {
       const movie = await Movie.findByPk(movieId);
@@ -53,7 +53,7 @@ router.get('/movie/:id', async (req, res) => {
     }
 });
 //create movie
-router.post('/movie', async (req, res) => {
+router.post('/movies', async (req, res) => {
     try {
         if (!req.body) {
             return res.status(400).json({ error: 'Request body is missing or empty' });
@@ -78,7 +78,7 @@ router.post('/movie', async (req, res) => {
     }
 });
 // update movie
-router.put('/movie/:id', async (req, res) => {
+router.put('/movies/:id', async (req, res) => {
     const movieId = req.params.id;
     try {
       const movieToUpdate = await Movie.findByPk(movieId);
@@ -110,7 +110,7 @@ router.put('/movie/:id', async (req, res) => {
     }
 });
 // delete movie
-router.delete('/movie/:id', async (req, res) => {
+router.delete('/movies/:id', async (req, res) => {
     const movieId = req.params.id;
     try {
       const movieToDelete = await Movie.findByPk(movieId);
