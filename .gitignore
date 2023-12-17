@@ -21,3 +21,5 @@ Sources/packages
 .publish
 .idea
 .vscode
+API/FilmuNuomaAPI/.idea/.idea.FilmuNuomaAPI/.idea/workspace.xml
+*.xml
