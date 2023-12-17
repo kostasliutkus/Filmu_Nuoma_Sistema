@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 //cia copy paste pagal savo endpoint.js faila
 const movieEndpoints = require('./movieEndpoints');
+const orderEndpoints = require('./orderEndpoints');
 const directorEndpoints = require('./directorEndpoints');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 
 //cia copy paste pagal savo endpoint.js faila
 app.use('/api', movieEndpoints);
+app.use('/api', orderEndpoints);
 app.use('/api', directorEndpoints);
 
 const secretKey = 'F8D3C71E8EA4E1A2CBA663272DBBA';
