@@ -31,7 +31,7 @@ app.MapRazorPages();
 
 var OrderGroup = app.MapGroup("/api");
 
-OrderGroup.MapGet("orders", async (int orderid, dbcontext dbContext) =>
+OrderGroup.MapGet("orders/{orderid:int}", async (int orderid, dbcontext dbContext) =>
 {
     var order = await dbContext.orders.FirstOrDefaultAsync(c => c.Id == orderid); ;
 
@@ -44,6 +44,7 @@ OrderGroup.MapGet("orders", async (int orderid, dbcontext dbContext) =>
 });
 OrderGroup.MapPost("orders/", async (CreateOrderDto createCityDto, dbcontext dbContext) =>
 {
+
     var order = new Order()
     {
         isPaid = createCityDto.isPaid,
@@ -55,7 +56,7 @@ OrderGroup.MapPost("orders/", async (CreateOrderDto createCityDto, dbcontext dbC
     dbContext.orders.Add(order);
     await dbContext.SaveChangesAsync();
 
-    return Results.Created($"/api/order/{order.Id:int}", new OrderDto(order.Id, order.isPaid, order.Price, order.orderDate, order.endDate, order.Movie));
+    return Results.Created($"/api/orders/{order.Id:int}", new OrderDto(order.Id, order.isPaid, order.Price, order.orderDate, order.endDate, order.Movie));
 });
 
 
