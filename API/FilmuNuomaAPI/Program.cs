@@ -5,7 +5,7 @@ using System;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddDbContext<dbcontext>(options =>options.UseMySQL(builder.Configuration.GetConnectionString("MYSQLDefaultConnection")));
+builder.Services.AddDbContext<FilmDbContext>(options =>options.UseMySql(builder.Configuration.GetConnectionString("MYSQLDefaultConnection")));
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -30,7 +30,7 @@ app.MapRazorPages();
 
 var OrderGroup = app.MapGroup("/api");
 
-OrderGroup.MapGet("/orders", async (int orderid, dbcontext dbContext) =>
+OrderGroup.MapGet("/orders", async (int orderid, FilmDbContext dbContext) =>
 {
     var city = await dbContext.orders.FirstOrDefaultAsync(c => c.Id == orderid); ;
 
