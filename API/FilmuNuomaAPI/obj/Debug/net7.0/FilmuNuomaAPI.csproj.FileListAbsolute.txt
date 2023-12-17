@@ -14,7 +14,6 @@ C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Deb
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\FilmuNuomaAPI.runtimeconfig.json
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\FilmuNuomaAPI.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\FilmuNuomaAPI.pdb
-C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\Google.Protobuf.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\Humanizer.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -29,8 +28,6 @@ C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Deb
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\Mono.TextTemplating.dll
-C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\MySql.Data.dll
-C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\MySql.Data.EntityFrameworkCore.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\System.CodeDom.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
 C:\Users\klaid\Desktop\UNIGITSTUFF\Filmu_Nuoma_Sistema\API\FilmuNuomaAPI\bin\Debug\net7.0\System.Drawing.Common.dll
