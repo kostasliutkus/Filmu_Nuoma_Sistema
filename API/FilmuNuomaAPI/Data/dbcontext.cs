@@ -21,8 +21,9 @@ namespace FilmuNuomaAPI.Data
             _configuration = configuration;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
         {
-           optionsBuilder.UseNpgsql(_configuration.GetConnectionString("MYSQLDefaultConnection"));
+            object value = optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
         }
 
 
