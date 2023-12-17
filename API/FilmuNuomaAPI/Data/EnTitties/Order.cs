@@ -14,3 +14,4 @@ namespace FilmuNuomaAPI.Data.EnTitties
     }
 }
 public record OrderDto(int Id, bool isPaid, float Price, string orderDate, string endDate, string Movie);
+public record CreateOrderDto(int Id, bool isPaid, float Price, string orderDate, string endDate, string Movie);
