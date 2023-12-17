@@ -4,8 +4,9 @@ const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 const jwt = require('jsonwebtoken');
 
+//cia copy paste pagal savo endpoint.js faila
 const movieEndpoints = require('./movieEndpoints');
-
+const directorEndpoints = require('./directorEndpoints');
 
 const app = express();
 const PORT = 5000;
@@ -13,7 +14,11 @@ const PORT = 5000;
 
 app.use(bodyParser.json());
 app.use(cors());
+
+//cia copy paste pagal savo endpoint.js faila
 app.use('/api', movieEndpoints);
+app.use('/api', directorEndpoints);
+
 const secretKey = 'F8D3C71E8EA4E1A2CBA663272DBBA';
 const sequelize = require('./db');
 

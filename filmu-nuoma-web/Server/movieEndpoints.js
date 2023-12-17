@@ -1,5 +1,6 @@
 const express = require('express');
 const {DataTypes } = require('sequelize');
+const bodyParser = require('body-parser');
 const router = express.Router();
 const sequelize = require('./db');
 const Movie = sequelize.define('filmas', {
@@ -51,7 +52,7 @@ router.get('/movie/:id', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
+//create movie
 router.post('/movie', async (req, res) => {
     try {
         if (!req.body) {
