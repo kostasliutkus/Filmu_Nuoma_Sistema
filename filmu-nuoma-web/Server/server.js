@@ -4,9 +4,12 @@ const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 const jwt = require('jsonwebtoken');
 
+const movieEndpoints = require('./movieEndpoints');
+
 const app = express();
 const PORT = 5000;
 
+app.use('/api/movies', movieEndpoints);
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -66,7 +69,7 @@ app.post('/api/login', async (req, res) => {
     
         // Generate JWT token
         const token = jwt.sign({ userId: user.id, username: user.slapyvardis, role: user.tipas, }, secretKey, { expiresIn: '1h' });
-    
+        console.log(token);
         res.json({ token });
       } catch (error) {
         console.error('Error during login:', error.message);
