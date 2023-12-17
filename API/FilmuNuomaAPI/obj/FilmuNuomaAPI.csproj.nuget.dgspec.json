@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\klaid\\Desktop\\UNIGITSTUFF\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\FilmuNuomaAPI.csproj": {}
+    "C:\\Users\\Kostas Liutkus\\Desktop\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\FilmuNuomaAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\klaid\\Desktop\\UNIGITSTUFF\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\FilmuNuomaAPI.csproj": {
+    "C:\\Users\\Kostas Liutkus\\Desktop\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\FilmuNuomaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\klaid\\Desktop\\UNIGITSTUFF\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\FilmuNuomaAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Kostas Liutkus\\Desktop\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\FilmuNuomaAPI.csproj",
         "projectName": "FilmuNuomaAPI",
-        "projectPath": "C:\\Users\\klaid\\Desktop\\UNIGITSTUFF\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\FilmuNuomaAPI.csproj",
-        "packagesPath": "C:\\Users\\klaid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\klaid\\Desktop\\UNIGITSTUFF\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\obj\\",
+        "projectPath": "C:\\Users\\Kostas Liutkus\\Desktop\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\FilmuNuomaAPI.csproj",
+        "packagesPath": "C:\\Users\\Kostas Liutkus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kostas Liutkus\\Desktop\\Filmu_Nuoma_Sistema\\API\\FilmuNuomaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\klaid\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Kostas Liutkus\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -58,9 +56,11 @@
               "target": "Package",
               "version": "[7.0.14, )"
             },
-            "MySql.Data.EntityFrameworkCore": {
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.13, )"
+              "version": "[7.0.14, )"
             },
             "Npgsql": {
               "target": "Package",
@@ -90,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
