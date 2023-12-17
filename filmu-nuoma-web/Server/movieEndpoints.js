@@ -85,6 +85,7 @@ router.put('/movie/:id', async (req, res) => {
       if (!movieToUpdate) {
         return res.status(404).json({ error: 'Movie not found' });
       }
+      console.log('req.body:', req.body);
       //keiciami filmo parametrai
       movieToUpdate.pavadinimas = req.body.pavadinimas || movieToUpdate.pavadinimas;
       movieToUpdate.isleidimo_data = req.body.isleidimo_data || movieToUpdate.isleidimo_data;
@@ -94,8 +95,8 @@ router.put('/movie/:id', async (req, res) => {
       movieToUpdate.kilmes_salis = req.body.kilmes_salis || movieToUpdate.kilmes_salis;
       movieToUpdate.Kalba = req.body.Kalba || movieToUpdate.Kalba;
       //mepakeicia subtitru ir kainos
-      movieToUpdate.subtitrai = req.body.subtitrai || movieToUpdate.subtitrai;
-      movieToUpdate.kaina = req.body.kaina || movieToUpdate.kaina;
+      movieToUpdate.subtitrai = req.body.subtitrai;// || movieToUpdate.subtitrai;
+      movieToUpdate.kaina = req.body.kaina;// || movieToUpdate.kaina;
 
       movieToUpdate.Zanras = req.body.Zanras || movieToUpdate.Zanras;
       movieToUpdate.fk_Rezisieriusid = req.body.fk_Rezisieriusid || movieToUpdate.fk_Rezisieriusid;
