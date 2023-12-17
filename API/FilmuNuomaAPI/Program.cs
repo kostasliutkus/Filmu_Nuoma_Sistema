@@ -1,7 +1,12 @@
 using FilmuNuomaAPI.Data;
 using FilmuNuomaAPI.Data.EnTitties;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Data;
+using System.Security.Claims;
+using FilmuNuomaAPI.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,34 +35,7 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 var OrderGroup = app.MapGroup("/api");
-
-OrderGroup.MapGet("orders/{orderid:int}", async (int orderid, dbcontext dbContext) =>
-{
-    var order = await dbContext.orders.FirstOrDefaultAsync(c => c.Id == orderid); ;
-
-    if (order == null)
-    {
-        return Results.NotFound();
-    }
-    return Results.Ok(new OrderDto(order.Id, order.isPaid, order.Price, order.orderDate, order.endDate, order.Movie));
-
-});
-OrderGroup.MapPost("orders/", async (CreateOrderDto createCityDto, dbcontext dbContext) =>
-{
-
-    var order = new Order()
-    {
-        isPaid = createCityDto.isPaid,
-        Price = createCityDto.Price,
-        orderDate = createCityDto.orderDate,
-        endDate = createCityDto.endDate,
-        Movie = createCityDto.Movie
-    };
-    dbContext.orders.Add(order);
-    await dbContext.SaveChangesAsync();
-
-    return Results.Created($"/api/orders/{order.Id:int}", new OrderDto(order.Id, order.isPaid, order.Price, order.orderDate, order.endDate, order.Movie));
-});
+OrderEndpoints.AddOrderAPI(OrderGroup);
 
 
 
