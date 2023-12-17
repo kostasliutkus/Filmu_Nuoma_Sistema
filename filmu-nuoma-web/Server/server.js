@@ -6,19 +6,16 @@ const jwt = require('jsonwebtoken');
 
 const movieEndpoints = require('./movieEndpoints');
 
+
 const app = express();
 const PORT = 5000;
 
-app.use('/api/movies', movieEndpoints);
+
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use('/api', movieEndpoints);
 const secretKey = 'F8D3C71E8EA4E1A2CBA663272DBBA';
-
-const sequelize = new Sequelize('vezliukai', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
-  });
+const sequelize = require('./db');
 
 const User = sequelize.define('klientas', {
     vardas: DataTypes.STRING,
@@ -69,7 +66,6 @@ app.post('/api/login', async (req, res) => {
     
         // Generate JWT token
         const token = jwt.sign({ userId: user.id, username: user.slapyvardis, role: user.tipas, }, secretKey, { expiresIn: '1h' });
-        console.log(token);
         res.json({ token });
       } catch (error) {
         console.error('Error during login:', error.message);
