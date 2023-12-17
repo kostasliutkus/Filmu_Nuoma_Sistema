@@ -1,5 +1,11 @@
+using FilmuNuomaAPI.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddDbContext<dbcontext>(options =>options.UseMySQL(builder.Configuration.GetConnectionString("MYSQLDefaultConnection")));
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -21,5 +27,25 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+var OrderGroup = app.MapGroup("/api");
+
+OrderGroup.MapGet("/orders", async (int orderid, dbcontext dbContext) =>
+{
+    var city = await dbContext.orders.FirstOrDefaultAsync(c => c.Id == orderid); ;
+
+    if (city == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(new OrderDto(city.Id, city.isPaid, city.Price, city.orderDate, city.endDate, city.Movie));
+
+});
+
+
+
+
+
+
 
 app.Run();
