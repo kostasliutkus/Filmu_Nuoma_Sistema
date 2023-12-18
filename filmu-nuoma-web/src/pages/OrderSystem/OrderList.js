@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../FilmSystem/FilmStyle.css';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 function OrderList() {
     const navigate = useNavigate();
 
@@ -10,38 +10,60 @@ function OrderList() {
     const goToCreateInvoice = () => {
         navigate(`/CreateInvoice`);
     };
+    const [orderData, setOrderData] = useState({});
+
+    useEffect(() => {
+        // Function to fetch user data from your API
+        const token = localStorage.getItem('token')
+        const fetchOrderData = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/orders', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+                const data = await response.json();
+                setOrderData(data); // Assuming the API returns an object with user data
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchOrderData();
+    }, []);
+
     return (
         <html className="film-html">
-        <body className="film-body">
-            
-            <h2>Movies</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Movie Name</th>
-                        <th>Price</th>
-                        <th>User</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr onClick={() => handleRowClick('1')}>
-                        <td>BASE RACE INCIDENT</td>
-                        <td>69</td>
-                        <td>Admin</td>
-                    </tr>
-                    <tr><button onClick={(goToCreateInvoice)}>Create Invoice</button></tr>
-                    <tr onClick={() => handleRowClick('2')}>
-                        <td>Never Gonna Give You Up</td>
-                        <td>14</td>
-                        <td>Admin</td>
-                    </tr>
-                    <tr><button onClick={(goToCreateInvoice)}>Create Invoice</button></tr>
-                </tbody>
+            <body className="film-body">
+
+                <h2>Movies</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Movie Name</th>
+                            <th>Price</th>
+                            <th>Order Date</th>
+                            <th>Is paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Object.keys(orderData).map((orderId) => (
+                            <tr key={orderId} onClick={() => handleRowClick(orderId)}>
+                                <td>{orderData[orderId].uzsakytas_filmas}</td>
+                                <td>{orderData[orderId].kaina}</td>
+                                <td>{orderData[orderId].uzsakymo_data}</td>
+                                <td>{orderData[orderId].apmoketas}</td>
+                            </tr>
+                        ))}
+                        <tr>
+                            <td colSpan="3"><button onClick={goToCreateInvoice}>Create Invoice</button></td>
+                        </tr>
+                    </tbody>
 
 
-            </table>
+                </table>
 
-        </body>
+            </body>
         </html>
     );
 }

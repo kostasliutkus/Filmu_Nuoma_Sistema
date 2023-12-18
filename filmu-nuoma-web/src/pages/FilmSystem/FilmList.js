@@ -12,8 +12,8 @@ function FilmList() {
         navigate(`/film-view/${id}`);
     };
 
-    const handleOrder = (id) => {
-        navigate(`/Order/${id}`);
+    const handleOrder = (id, movieName) => {
+        navigate(`/Order/${id}?movieName=${movieName}`);
     };
     return (
         <html className="film-html">
@@ -48,7 +48,12 @@ function FilmList() {
                 
                 </td>
             </tr>
-            <td><button onClick={() =>handleOrder('jDNBOy6UE1g') }>Rent Movie</button></td>
+            <script>
+                // cia i handle order 
+                // pirmas param movie id 
+                // antras movie name
+            </script>
+            <td><button onClick={() =>handleOrder('1', "BASE RACE INCIDENT") }>Rent Movie</button></td>
             </tbody>
         </table>
         <div className="grid-item">
