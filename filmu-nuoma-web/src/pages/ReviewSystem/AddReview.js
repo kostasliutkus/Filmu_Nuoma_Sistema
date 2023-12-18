@@ -41,6 +41,7 @@ function AddReview()
     
           if (response.ok) {
             alert('Review added successfully!');
+            navigate(`/film-view/${id}`);
             // Optionally, you can redirect to another page or perform other actions.
           } else {
             const errorMessage = await response.text();
