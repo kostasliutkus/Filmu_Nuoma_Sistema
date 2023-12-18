@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 const jwt = require('jsonwebtoken');
+const QRCode = require('qrcode');
+const OTPAuth = require('otpauth');
+const base32 = require('thirty-two');
+const crypto = require('crypto');
 
 //cia copy paste pagal savo endpoint.js faila
 const movieEndpoints = require('./movieEndpoints');
@@ -39,6 +43,7 @@ const User = sequelize.define('klientas', {
     slapyvardis: DataTypes.STRING,
     slaptazodis: DataTypes.STRING,
     sukurimo_data: DataTypes.STRING,
+    twoFactorSecret: DataTypes.STRING,
     kreditas: DataTypes.INTEGER,
 }, {
     timestamps: false,
@@ -52,15 +57,102 @@ console.log('Database and table synced');
 console.error('Error syncing database:', error);
 });
 
+
+const generateRandomBase32 = () => {
+    const buffer = crypto.randomBytes(15);
+    const base32String = base32.encode(buffer).toString().replace(/=/g, "").substring(0, 24);
+    return base32String;
+};
+
 app.post('/api/register', async (req, res) => {
+    const { slapyvardis } = req.body;
+
     try {
-      const newUser = await User.create(req.body);
-      res.status(201).json({ message: 'User registered successfully' });
+        // Check if the username is already taken
+        const existingUser = await User.findOne({
+            where: {
+                slapyvardis,
+            },
+        });
+
+        if (existingUser) {
+            return res.status(400).json({ message: 'Username is already taken' });
+        }
+
+        // If the username is not taken, proceed with user registration
+        const newUser = await User.create(req.body);
+
+        const secret = generateRandomBase32();
+        newUser.twoFactorSecret = secret;
+        await newUser.save();
+
+        const totp = new OTPAuth.TOTP({
+            issuer: "filmu-nuoma",
+            label: "Filmu nuoma",
+            algorithm: "SHA1",
+            digits: 6,
+            period: 30,
+            secret: secret,
+        });
+
+        const otpauth_url = totp.toString();
+
+        const qrCodeDataURL = await QRCode.toDataURL(otpauth_url);
+
+        res.status(201).json({
+            message: 'User registered successfully',
+            qrCodeDataURL,
+        });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-  });
+});
+
+app.post('/api/verify-2fa', async (req, res) => {
+    const { userId, token, twoFactorCode } = req.body;
+
+    try {
+        jwt.verify(token, secretKey, async (err, decoded) => {
+            if (err || decoded.userId !== userId) {
+                console.log("invalid token");
+                return res.status(401).json({ error: 'Invalid token' });
+            }
+            const user = await User.findByPk(userId);
+
+            if (!user) {
+                console.log("user not found");
+                return res.status(404).json({ error: 'User not found' });
+            }
+
+            const totp = new OTPAuth.TOTP({
+                issuer: "filmu-nuoma",
+                label: "Filmu nuoma",
+                algorithm: "SHA1",
+                digits: 6,
+                secret: user.twoFactorSecret,
+            });
+            
+            const delta = totp.validate({ token:twoFactorCode, window: 1 });
+
+            if (delta == null) {
+                console.log("invalid 2fa");
+                return res.status(401).json({ message: 'Invalid 2FA code' });
+            }
+
+            const newToken = jwt.sign({
+                userId: user.id,
+                username: user.slapyvardis,
+                role: user.tipas,
+            }, secretKey, { expiresIn: '1h' });
+            res.json({ message: '2FA verification successful', newtoken: newToken });
+        });
+    } catch (error) {
+        console.error('Error during 2FA verification:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
@@ -80,7 +172,8 @@ app.post('/api/login', async (req, res) => {
     
         // Generate JWT token
         const token = jwt.sign({ userId: user.id, username: user.slapyvardis, role: user.tipas, }, secretKey, { expiresIn: '1h' });
-        res.json({ token });
+        const userId = user.id;
+        res.json({ token,  userId});
       } catch (error) {
         console.error('Error during login:', error.message);
         res.status(500).json({ message: 'Internal Server Error' });

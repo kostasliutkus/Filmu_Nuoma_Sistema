@@ -13,7 +13,7 @@ function Logout() {
     <div>
         {useEffect(() => {
         handleLogout();
-        }, [])}
+        }, [navigate])}
     </div>
     );
 }

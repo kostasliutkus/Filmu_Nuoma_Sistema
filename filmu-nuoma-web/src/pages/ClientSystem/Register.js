@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import {useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { Toast } from 'react-bootstrap';
 
 function Register()
 {
     const navigate = useNavigate();
+    const [showErrorToast, setShowErrorToast] = useState(false);
 
     const [formData, setFormData] = useState({
         vardas: '',
@@ -30,13 +32,20 @@ function Register()
           };
 
           console.log('Form submitted:', formDataWithDate);
-          await axios.post('http://localhost:5000/api/register', formDataWithDate);
-      
-          console.log('User registered successfully');
-          navigate('/'); 
+          const response = await axios.post('http://localhost:5000/api/register', formDataWithDate);
+          
+
+          const { message, qrCodeDataURL } = response.data;
+          
+          navigate("/registration-success", { state: { qrCodeDataURL } });
           
         } catch (error) {
-          console.error('Registration failed:', error.message);
+          console.error("registering failed:", error.message);
+    
+          if (error.response && error.response.status === 400) {
+            // Show Bootstrap Toast for authentication failure
+            setShowErrorToast(true);
+          }
         }
     };
 
@@ -126,6 +135,20 @@ function Register()
             </div>
             <button type="submit" className="btn">Register</button>
           </form>
+          <Toast
+                show={showErrorToast}
+                onClose={() => setShowErrorToast(false)}
+                style={{
+                position: 'absolute',
+                top: 20,
+                right: 20,
+                }}
+            >
+                <Toast.Header>
+                <strong className="me-auto">Error</strong>
+                </Toast.Header>
+                <Toast.Body>Username is already taken</Toast.Body>
+            </Toast>
         </div>
       );
 }
