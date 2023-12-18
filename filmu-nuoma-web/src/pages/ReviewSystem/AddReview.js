@@ -22,13 +22,15 @@ function AddReview()
         setFormData({
           ...formData,
           [e.target.name]: e.target.value,
+          fk_Filmasid: id,
+          fk_Klientasid: 1,
         });
       };
       const handleSubmit = async () => {
         try {
             setFormData({
                 ...formData,
-                fk_Filmasid: 2,
+                fk_Filmasid: id,
                 fk_Klientasid: 1,
               });
           const response = await fetch('http://localhost:5000/api/reviews', {
