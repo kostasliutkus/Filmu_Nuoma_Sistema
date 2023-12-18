@@ -32,6 +32,7 @@ CREATE TABLE Klientas
 	kreditas int NOT NULL,
 	telefonas varchar (255),
 	el_pastas varchar (255),
+	twoFactorSecret varchar (255),
 	slapyvardis varchar (255) NOT NULL,
 	slaptazodis varchar (255) NOT NULL,
 	sukurimo_data varchar (255) NOT NULL,
