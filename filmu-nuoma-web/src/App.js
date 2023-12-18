@@ -22,6 +22,7 @@ import EditProfile from './pages/ClientSystem/EditProfile.js';
 import Logout from './pages/ClientSystem/Logout.js';
 import NavigationBar from './pages/NavBar';
 import { AuthProvider } from './pages/ClientSystem/AuthContext';
+import Verify2FA from './pages/ClientSystem/Authentification.js';
 
 function App() {
 
@@ -49,7 +50,8 @@ function App() {
             <Route path="/AddFilm" element={<AddFilm/>} />
             <Route path="/EditFilm" element={<EditFilm/>} />
             <Route path="/CreateInvoice" element={<CreateInvoice/>} />
-            <Route path="/film-view/:id" element={<FilmView/>} /> 
+            <Route path="/film-view/:id" element={<FilmView/>} />
+            <Route path="/verify-2fa" element={<Verify2FA/>} /> 
         </Routes>
       </AuthProvider>
       </>
