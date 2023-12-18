@@ -19,10 +19,10 @@ const FilmView = () => {
         navigate(`/Review`);
     };
     const clickAddReview = () => {
-        navigate(`/AddReview`);
+        navigate(`/AddReview/${id}`);
     };
     const clickEditReview = () => {
-        navigate(`/EditReview`);
+        navigate(`/EditReview/${id}`);
     };
 
     return (

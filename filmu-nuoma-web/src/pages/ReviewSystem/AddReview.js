@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import  {useNavigate, useParams} from 'react-router-dom';
 import Rating from '@mui/material/Rating';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useNavigate } from "react-router";
 
 function AddReview()
 {
     const navigate = useNavigate();
+    const {id} = useParams();
     const handleRowClick = (id) => {
         navigate(`/film-view/${id}`);
     };
@@ -16,7 +17,6 @@ function AddReview()
         aprasymas: '',
         teigiamas: 0,
         neigiamas: 0,
-        fk_Klientasid: 0,
       });
     const handleChange = (e) => {
         setFormData({
@@ -26,7 +26,12 @@ function AddReview()
       };
       const handleSubmit = async () => {
         try {
-          const response = await fetch('/reviews', {
+            setFormData({
+                ...formData,
+                fk_Filmasid: 2,
+                fk_Klientasid: 1,
+              });
+          const response = await fetch('http://localhost:5000/api/reviews', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -61,12 +66,6 @@ function AddReview()
 
             <label htmlFor="neigiamas">Negative:</label>
             <input type="number" id="neigiamas" name="neigiamas" value={formData.neigiamas} onChange={handleChange} required /><br />
-
-            <label htmlFor="fk_Filmasid">Film ID:</label>
-            <input type="number" id="fk_Filmasid" name="fk_Filmasid" value={formData.fk_Filmasid} onChange={handleChange} required /><br />
-
-            <label htmlFor="fk_Klientasid">Client ID:</label>
-            <input type="number" id="fk_Klientasid" name="fk_Klientasid" value={formData.fk_Klientasid} onChange={handleChange} required /><br />
 
             <button type="button" onClick={handleSubmit}>Add Review</button>
         </form>

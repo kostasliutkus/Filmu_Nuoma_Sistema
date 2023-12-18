@@ -51,6 +51,7 @@ router.get('/reviews/:id', async (req, res) => {
 // POST a new review
 router.post('/reviews', async (req, res) => {
   const { ivertinimas, aprasymas, teigiamas, neigiamas, fk_Filmasid, fk_Klientasid } = req.body;
+  console.log(req.body);
   try {
     const newReview = await Review.create({
       ivertinimas,
@@ -62,6 +63,7 @@ router.post('/reviews', async (req, res) => {
     });
     res.status(201).json(newReview);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
