@@ -101,27 +101,25 @@ const FilmView = () => {
                         {reviews.map((review) => (
                             <Box 
                             key={review.id}
-                            sx={{
-                                width: 400,
-                                ":hover": {
-                                    boxShadow: 6,
-                                    cursor:'pointer',
-                                    },
-                            }}
-                            onClick={() => clickReview(review.id)}>
+                            sx={{width: 400}}>
                             <Stack direction="row" spacing={2}>
                                 <Avatar sx={{ backgroundColor: getRandomColor() }}>{review.aprasymas.charAt(0)}</Avatar>
                                 <Stack direction="column" spacing={0.1}>
                                     <h3>{review.fk_Klientasid}</h3>
                                 </Stack>
-                                <Rating name="read-only" size="large" value={1} readOnly />
+                                <Rating name="read-only" size="large" value={review.ivertinimas} readOnly />
                             </Stack><br></br>
                             <textarea rows="4" cols="50">{review.aprasymas}</textarea>
                             <Stack direction="row" spacing={2}><p>Likes {review.teigiamas}</p>
                             <p>Dislikes {review.neigiamas}</p></Stack>
 
-                            <Box sx={{ bgcolor: '#c5cae9' }}> MORE</Box>                   
-                        </Box>
+                            <Box sx={{ bgcolor: '#c5cae9',
+                                ":hover": {
+                                    boxShadow: 6,
+                                    cursor:'pointer',
+                                    }, }} onClick={() => clickReview(review.id)}> MORE</Box> 
+                            <br></br><br></br>    
+                        </Box>                           
                         ))}
                         <br></br><br></br>
                         <Button onClick={clickAddReview} variant="contained" color="primary">
