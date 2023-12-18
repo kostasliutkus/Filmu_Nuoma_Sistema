@@ -53,15 +53,15 @@ router.post('/orders', async (req, res) => {
         if (!req.body) {
             return res.status(400).json({ error: 'Request body is missing or empty' });
         }
-        const neworder = await Order.create({
-            apmoketas: req.body.pavadinimas,
-            kaina: req.body.isleidimo_data,
-            uzsakymo_data: req.body.trukme,
-            uzsakytas_filmas: req.body.amziaus_cenzas,
-            fk_Filmasid: req.body.studija,
-            fk_Klientasid: req.body.kilmes_salis,
-        });
-        res.status(201).json(neworder);
+        const newOrder = await Order.create({
+          apmoketas: req.body.apmoketas,
+          kaina: req.body.kaina,
+          uzsakymo_data: req.body.uzsakymo_data,
+          uzsakytas_filmas: req.body.uzsakytas_filmas,
+          fk_Filmasid: req.body.fk_Filmasid,
+          fk_Klientasid: req.body.fk_Klientasid,
+      });
+        res.status(201).json(newOrder);
     } catch (error) {
         console.error('Error creating order:', error);
         res.status(500).json({ error: 'Internal Server Error' });
