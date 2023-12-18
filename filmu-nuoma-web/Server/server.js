@@ -35,6 +35,7 @@ const User = sequelize.define('klientas', {
     slapyvardis: DataTypes.STRING,
     slaptazodis: DataTypes.STRING,
     sukurimo_data: DataTypes.STRING,
+    kreditas: DataTypes.INTEGER,
 }, {
     timestamps: false,
   });
@@ -108,11 +109,13 @@ app.get('/api/user-profile', async (req, res) => {
     
         // Return user profile data
         res.json({
+            id: user.id,
             username: user.slapyvardis,
             name: user.vardas,
             lastName: user.pavarde,
             phoneNumber: user.telefonas,
             email: user.el_pastas,
+            kreditas: user.kreditas,
         });
         } catch (error) {
         console.error('Error fetching user data:', error);
@@ -177,7 +180,8 @@ app.put('/api/update-profile', (req, res) => {
             pavarde: req.body.lastName,
             telefonas: req.body.phoneNumber,
             el_pastas: req.body.email,
-            slapyvardis: req.body.username
+            slapyvardis: req.body.username,
+            kreditas: req.body.kreditas,
           };
 
         try {

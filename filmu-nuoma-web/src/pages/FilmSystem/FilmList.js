@@ -53,7 +53,7 @@ function FilmList() {
                 // pirmas param movie id 
                 // antras movie name
             </script>
-            <td><button onClick={() =>handleOrder('1', "BASE RACE INCIDENT") }>Rent Movie</button></td>
+            <td><button onClick={() =>handleOrder('2', "BASE RACE INCIDENT") }>Rent Movie</button></td>
             </tbody>
         </table>
         <div className="grid-item">

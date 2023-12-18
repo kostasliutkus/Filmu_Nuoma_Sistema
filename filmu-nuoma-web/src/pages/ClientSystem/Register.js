@@ -15,6 +15,7 @@ function Register()
         slapyvardis: '',
         slaptazodis: '',
         sukurimo_data: '',
+        kreditas: '',
       });
 
     const handleSubmit = async (e) => {
@@ -25,6 +26,7 @@ function Register()
           const formDataWithDate = {
             ...formData,
             sukurimo_data: currentDate,
+            kreditas: 100
           };
 
           console.log('Form submitted:', formDataWithDate);
