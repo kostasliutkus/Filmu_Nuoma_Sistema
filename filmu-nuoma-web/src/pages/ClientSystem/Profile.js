@@ -35,6 +35,12 @@ function Profile()
 
     const handleDeleteProfile = async () => {
         const token = localStorage.getItem('token');
+
+        const isConfirmed = window.confirm("Are you sure you want to delete your profile? This action cannot be undone.");
+
+        if (!isConfirmed) {
+          return; // Exit if user cancels the deletion
+        }
     try {
       const response = await fetch('http://localhost:5000/api/delete-profile', {
         method: 'DELETE',
