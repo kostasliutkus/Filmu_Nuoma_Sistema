@@ -10,6 +10,7 @@ const orderEndpoints = require('./orderEndpoints');
 const directorEndpoints = require('./directorEndpoints');
 const reviewEndpoints = require('./reviewEndpoints');
 const actorEndpoints = require('./actorEndpoints');
+const genreEndpoints = require('./genreEndpoints');
 
 const app = express();
 const PORT = 5000;
@@ -24,6 +25,7 @@ app.use('/api', orderEndpoints);
 app.use('/api', directorEndpoints);
 app.use('/api', reviewEndpoints);
 app.use('/api', actorEndpoints);
+app.use('/api', genreEndpoints);
 
 const secretKey = 'F8D3C71E8EA4E1A2CBA663272DBBA';
 const sequelize = require('./db');

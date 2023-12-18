@@ -1,30 +1,29 @@
 import React,{useState,useEffect} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
-import VideoPlayer  from './VideoPlayer.js' 
 
 function AddFilm() {
-//     const [genres, setGenres] = useState([]);
 
-//     useEffect(() => {
-//     const fetchGenres = async () => {
-//         try {
-//             const response = await fetch('http://localhost:5000/api/genres'); // Replace with your actual API endpoint
-//             const data = await response.json();
-//             setGenres(data);
-//         } catch (error) {
-//             console.error('Error fetching genres:', error);
-//         }
-//     };
-
-//     fetchGenres();
-// }, []);
 
     const navigate=useNavigate();
     const goBack = () => {
         navigate(`/FilmList/`);
     };
     const [directors, setDirectors] = useState([]);
+    const [genres, setGenres] = useState([]);
 
+    useEffect(() => {
+    const fetchGenres = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/genres'); // Replace with your actual API endpoint
+            const data = await response.json();
+            setGenres(data);
+        } catch (error) {
+            console.error('Error fetching genres:', error);
+        }
+    };
+    fetchGenres();
+    }, []);
+    
     useEffect(() => {
         const fetchDirectors = async () => {
             try {
@@ -68,7 +67,7 @@ function AddFilm() {
                 ))}
             </select>
         </div>
-        
+
         <div class="form-group">
             <label for="rating" class="form-label">Rating:</label>
             <input type="text" id="rating" name="rating" class="form-control" required />
@@ -105,11 +104,11 @@ function AddFilm() {
         <div class="form-group">
             <label for="genre" class="form-label">Genre:</label>
             <select id="genre" name="genre" class="form-control" required>
-                {/* {genres.map((genre) => (
+                {genres.map((genre) => (
                     <option key={genre.id_Zanras} value={genre.id_Zanras}>
                         {genre.name}
                     </option>
-                ))} */}
+                ))}
             </select>
         </div>
 
