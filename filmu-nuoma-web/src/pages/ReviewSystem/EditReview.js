@@ -55,6 +55,14 @@ function EditReview()
           [e.target.name]: e.target.value,
         });
       };
+      const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
     
       const handleEditReview = async () => {
         try {

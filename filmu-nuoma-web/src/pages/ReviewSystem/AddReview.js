@@ -51,46 +51,33 @@ function AddReview()
           alert('Error adding review. Please try again.');
         }
       };
-    const [value, setValue] = React.useState(0);
+      const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
     return(
         <body>
             <form>            
-            <label htmlFor="ivertinimas">Rating:</label>
-            <input type="number" id="ivertinimas" name="ivertinimas" value={formData.ivertinimas} onChange={handleChange} required /><br />
-
-            <label htmlFor="aprasymas">Description:</label>
-            <textarea id="aprasymas" name="aprasymas" value={formData.aprasymas} onChange={handleChange} required></textarea><br />
-
-            <label htmlFor="teigiamas">Positive:</label>
-            <input type="number" id="teigiamas" name="teigiamas" value={formData.teigiamas} onChange={handleChange} required /><br />
-
-            <label htmlFor="neigiamas">Negative:</label>
-            <input type="number" id="neigiamas" name="neigiamas" value={formData.neigiamas} onChange={handleChange} required /><br />
-
-            <button type="button" onClick={handleSubmit}>Add Review</button>
-        </form>
-            <Stack direction="row" spacing={2}>
-                <Avatar >H</Avatar>
-                <Stack direction="column" spacing={0.1}>
-                    <h3>Anonimas</h3>
-                    <label>now</label>
+                <Stack direction="row" spacing={2}>
+                    <Avatar sx={{ backgroundColor: getRandomColor() }}></Avatar>
+                    <Rating
+                        name="ivertinimas"
+                        size="large"
+                        value={formData.ivertinimas}
+                        onChange={handleChange}
+                    />
+                </Stack><br></br>
+                <textarea name="aprasymas" value={formData.aprasymas} onChange={handleChange} required rows="4" cols="50" placeholder="Add review..."></textarea>   
+                <br></br><br></br>
+                <Stack direction="row" spacing={5}>
+                    <Button onClick={handleSubmit}>Add review</Button>
+                    <Button >Share</Button> 
                 </Stack>
-                <Rating
-                    name="simple-controlled"
-                    size="large"
-                    value={value}
-                    onChange={(event, newValue) => {
-                    setValue(newValue);
-                    }}
-                />
-            </Stack><br></br>
-            <textarea rows="4" cols="50" placeholder="Add review..."></textarea>   
-            <br></br><br></br>
-            <Stack direction="row" spacing={5}>
-                <Button onClick={() => handleRowClick('dQw4w9WgXcQ')}>Add review</Button>
-                <Button >Share</Button> 
-            </Stack>              
-                
+            </form>   
         </body> );
 }
 export default AddReview

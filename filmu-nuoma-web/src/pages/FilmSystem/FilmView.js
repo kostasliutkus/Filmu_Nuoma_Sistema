@@ -1,29 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import  {useNavigate, useParams} from 'react-router-dom';
 import VideoPlayer  from './VideoPlayer.js';
 import Rating from '@mui/material/Rating';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { deepOrange, deepPurple, cyan} from '@mui/material/colors';
 import { Box } from "@mui/material";
-import { useState } from 'react';
 import '@mui/material/styles';
 import './FilmStyle.css'
 
 const FilmView = () => {
     const navigate = useNavigate();
     const {id} = useParams();
+    const [reviews, setReviews] = useState([]);
+    const [userId, setUserId] = useState(null);
+    const [username, setUsername] = useState(null);
 
-    const clickReview = () => {
-        navigate(`/Review`);
+    const clickReview = (id) => {
+        navigate(`/Review/${id}`);
     };
     const clickAddReview = () => {
         navigate(`/AddReview/${id}`);
-    };
-    const clickEditReview = () => {
-        navigate(`/EditReview/${id}`);
-    };
+    };    
+    useEffect(() => {
+        const fetchReviews = async () => {
+          try {
+            const response = await fetch('http://localhost:5000/api/reviews');
+    
+            if (response.ok) {
+              const data = await response.json();
+              setReviews(data);
+            } else {
+              const errorMessage = await response.text();
+              alert(`Error fetching reviews: ${errorMessage}`);
+            }
+          } catch (error) {
+            console.error('Error fetching reviews:', error);
+            alert('Error fetching reviews. Please try again.');
+          }
+        };
+    
+        fetchReviews();
+      }, []);
+      const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
 
     return (
         <body>
@@ -59,112 +87,43 @@ const FilmView = () => {
                         </tbody>
                     </table>
                 </div>
-
                 <div className="grid-item">
+                    <h1>Reviews</h1>
                     <Stack direction="row" spacing={2}>
-                        <div className="grid-item">
-                            <h1>Reviews</h1> 
-                            <Stack direction="row" spacing={2}>
-                                <h5>Average rating</h5>
-                                <Rating name="read-only" size="large" value={3} readOnly />
-                                <h4>3 users</h4>
-                            </Stack> 
-                            <br></br><br></br>
-                            <Box sx={{
-                                    width: 400,
-                                    ":hover": {
-                                        boxShadow: 6,
-                                        cursor:'pointer',
-                                        },
-                                }}
-                                onClick={() => clickReview()}>
-                                <Stack direction="row" spacing={2}>
-                                    <Avatar >H</Avatar>
-                                    <Stack direction="column" spacing={0.1}>
-                                        <h3>Anonimas</h3>
-                                        <label>20 min ago</label>
-                                    </Stack>
-                                    <Rating name="read-only" size="large" value={1} readOnly />
-                                </Stack><br></br>
-                                <textarea rows="4" cols="50">Cinematek ensures a top-notch streaming experience with high-quality playback and minimal buffering. The streaming platform is adaptive, adjusting to varying internet speeds without...</textarea>
-                                <Box sx={{ bgcolor: '#c5cae9' }}> MORE</Box>                   
-                            </Box>
-                            <br></br><br></br>
-                            <Box sx={{
-                                    width: 400,
-                                    ":hover": {
-                                        boxShadow: 6,
-                                        cursor:'pointer',
-                                        },
-                                }}
-                                onClick={() => clickReview()}>
-                                <Stack direction="row" spacing={2}>
-                                    <Avatar sx={{ bgcolor: deepOrange[500] }}>T</Avatar>
-                                    <Stack direction="column" spacing={0.1}>
-                                        <h3>Turtle_enjoyer</h3>
-                                        <label>5 hours ago</label>
-                                    </Stack>
-                                    <Rating name="read-only" size="large" value={5} readOnly />
-                                </Stack><br></br>
-                                <textarea rows="4" cols="50">Cinematek ensures a top-notch streaming experience with high-quality playback and minimal buffering. The streaming platform is adaptive, adjusting to varying internet speeds without...</textarea>
-                                <Box sx={{ bgcolor: '#c5cae9' }}> MORE</Box>                
-                            </Box>
-                            <br></br><br></br>
-                            <Box sx={{
-                                    width: 400,
-                                    ":hover": {
-                                        boxShadow: 6,
-                                        cursor:'pointer',
-                                        },
-                                }}
-                                onClick={() => clickReview()}>
-                                <Stack direction="row" spacing={2}>
-                                    <Avatar sx={{ bgcolor: deepPurple[500] }}>A</Avatar>
-                                    <Stack direction="column" spacing={0.1}>
-                                        <h3>Anonymus123</h3>
-                                        <label>3.5 hours ago</label>
-                                    </Stack>
-                                    <Rating name="read-only" size="large" value={3} readOnly />
-                                </Stack><br></br>
-                                <textarea rows="4" cols="50">Cinematek ensures a top-notch streaming experience with high-quality playback and minimal buffering. The streaming platform is adaptive, adjusting to varying internet speeds without...</textarea>
-                                <Box sx={{ bgcolor: '#c5cae9' }}> MORE</Box>                   
-                            </Box>
-                        </div>
-                        <div className="grid-item">
-                            <h1>My reviews</h1> 
-                            <Box sx={{
-                                    width: 400,
-                                    ":hover": {
-                                        cursor:'pointer',
-                                        boxShadow: 6,
-                                        },
-                                }}
-                                onClick={() => clickReview()}>
-                                <Stack direction="row" spacing={2}>
-                                    <Avatar sx={{ bgcolor: cyan[500] }}>M</Avatar>
-                                    <Stack direction="column" spacing={0.1}>
-                                        <h3>Me</h3>
-                                        <label>2 hours ago</label>
-                                    </Stack>
-                                    <Rating name="read-only" size="large" value={5} readOnly />
-                                </Stack><br></br>
-                                <textarea rows="4" cols="50">Cinematek ensures a top-notch streaming experience with high-quality playback and minimal buffering. The streaming platform is adaptive, adjusting to varying internet speeds without...</textarea>
-                                <Box sx={{ bgcolor: '#c5cae9' }}> MORE</Box>                
-                            </Box>
-                            <br></br><br></br>
-                            <Stack direction="row" spacing={5}>
-                                <Button size="large" onClick={() => clickAddReview()}>Add review</Button>
-                                <Button size="large" onClick={() => clickEditReview()}>Edit review</Button>
-                            </Stack>                            
-                        </div>
-                    
+                        <h5>Average rating</h5>
+                        <Rating name="read-only" size="large" value={3} readOnly />
+                        <h4>{reviews.length} users</h4>
                     </Stack> 
-                    
-                </div>
+                    <br></br><br></br>
+                        {reviews.map((review) => (
+                            <Box 
+                            key={review.id}
+                            sx={{width: 400}}>
+                            <Stack direction="row" spacing={2}>
+                                <Avatar sx={{ backgroundColor: getRandomColor() }}>{review.aprasymas.charAt(0)}</Avatar>
+                                <Stack direction="column" spacing={0.1}>
+                                    <h3>{review.fk_Klientasid}</h3>
+                                </Stack>
+                                <Rating name="read-only" size="large" value={review.ivertinimas} readOnly />
+                            </Stack><br></br>
+                            <textarea rows="4" cols="50">{review.aprasymas}</textarea>
+                            <Stack direction="row" spacing={2}><p>Likes {review.teigiamas}</p>
+                            <p>Dislikes {review.neigiamas}</p></Stack>
 
+                            <Box sx={{ bgcolor: '#c5cae9',
+                                ":hover": {
+                                    boxShadow: 6,
+                                    cursor:'pointer',
+                                    }, }} onClick={() => clickReview(review.id)}> MORE</Box> 
+                            <br></br><br></br>    
+                        </Box>                           
+                        ))}
+                        <br></br><br></br>
+                        <Button onClick={clickAddReview} variant="contained" color="primary">
+                            Add Review
+                        </Button>
+                </div>   
             </div>
-
-
         </body>
     );  
 };

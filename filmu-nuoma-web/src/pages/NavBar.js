@@ -9,7 +9,7 @@ function NavigationBar() {
     <nav>
       <ul>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/FilmList">Films</Link></li>
+        <li><Link to="/FilmList">Movies</Link></li>
         <li><Link to="/OrderList">Orders</Link></li>
         {isLoggedIn ? (
           <>
