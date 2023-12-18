@@ -35,8 +35,8 @@ function App() {
             <Route path="/" element ={<HomePage/>}/>
             <Route path="/FilmList" element ={<FilmList/>}/>
             <Route path="/OrderList" element ={<OrderList/>}/>
-            <Route path="/Review/:id" element ={<Review/>}/>
-            <Route path="/EditReview/:id" element ={<EditReview/>}/>
+            <Route path="/Review/:id/:fId" element ={<Review/>}/>
+            <Route path="/EditReview/:id/:fId" element ={<EditReview/>}/>
             <Route path="/AddReview/:id" element ={<AddReview/>}/>
             <Route path="/Profile" element ={<Profile/>}/>
             <Route path="/RegLog" element ={<RegLog/>}/>

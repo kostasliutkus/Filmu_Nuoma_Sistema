@@ -14,14 +14,15 @@ import './FilmStyle.css'
 const FilmView = () => {
     const navigate = useNavigate();
     const {id} = useParams();
+    const parsedId = parseInt(id, 10);
     const [reviews, setReviews] = useState([]);
     const [userId, setUserId] = useState(null);
     const [username, setUsername] = useState(null);
 
-    const clickReview = (id) => {
-        navigate(`/Review/${id}`);
+    const clickReview = (idd) => {
+        navigate(`/Review/${idd}/${id}`);
     };
-    const clickAddReview = () => {
+    const clickAddReview = (id) => {
         navigate(`/AddReview/${id}`);
     };    
     useEffect(() => {
@@ -52,6 +53,7 @@ const FilmView = () => {
         }
         return color;
       };
+      const filteredReviews = reviews.filter((review) => review.fk_Filmasid === parsedId);
 
     return (
         <body>
@@ -92,10 +94,10 @@ const FilmView = () => {
                     <Stack direction="row" spacing={2}>
                         <h5>Average rating</h5>
                         <Rating name="read-only" size="large" value={3} readOnly />
-                        <h4>{reviews.length} users</h4>
+                        <h4>{filteredReviews.length} users</h4>
                     </Stack> 
                     <br></br><br></br>
-                        {reviews.map((review) => (
+                        {filteredReviews.map((review) => (
                             <Box 
                             key={review.id}
                             sx={{width: 400}}>
@@ -119,7 +121,7 @@ const FilmView = () => {
                         </Box>                           
                         ))}
                         <br></br><br></br>
-                        <Button onClick={clickAddReview} variant="contained" color="primary">
+                        <Button onClick={() => clickAddReview(id)} variant="contained" color="primary">
                             Add Review
                         </Button>
                 </div>   

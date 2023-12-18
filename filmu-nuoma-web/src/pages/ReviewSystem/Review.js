@@ -8,7 +8,7 @@ import { FacebookShareButton, RedditShareButton,  TwitterShareButton} from "reac
 import { FacebookIcon, TwitterIcon, RedditIcon } from "react-share";
 
 function Review() {
-  const { id } = useParams();
+  const { id, fId } = useParams();
   const navigate = useNavigate();
 
   const [reviewData, setReviewData] = useState(null);
@@ -46,7 +46,7 @@ function Review() {
     return color;
   };
   const clickEditReview = () => {
-    navigate(`/EditReview/${id}`);
+    navigate(`/EditReview/${fId}/${reviewData.id}`);
   };
   const clickDeleteReview = async () => {
     try {
@@ -56,7 +56,7 @@ function Review() {
 
       if (response.ok) {
         alert('Review deleted successfully!');
-        navigate(`/film-view/${id}`); // Navigate to the reviews page or another appropriate page
+        navigate(`/film-view/${fId}`); // Navigate to the reviews page or another appropriate page
       } else {
         const errorMessage = await response.text();
         alert(`Error deleting review: ${errorMessage}`);
