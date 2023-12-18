@@ -123,6 +123,10 @@ const FilmView = () => {
                             <Box sx={{ bgcolor: '#c5cae9' }}> MORE</Box>                   
                         </Box>
                         ))}
+                        <br></br><br></br>
+                        <Button onClick={clickAddReview} variant="contained" color="primary">
+                            Add Review
+                        </Button>
                 </div>   
             </div>
         </body>
