@@ -4,6 +4,8 @@ import Rating from '@mui/material/Rating';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { FacebookShareButton, RedditShareButton,  TwitterShareButton} from "react-share";
+import { FacebookIcon, TwitterIcon, RedditIcon } from "react-share";
 
 function Review() {
   const { id } = useParams();
@@ -88,11 +90,27 @@ function Review() {
         <Button variant="contained" color="error" onClick={clickDeleteReview}>
           Delete Review
         </Button>
-      </Stack>
-
-      {/* Add any other information you want to display */}
-      
-      
+        <FacebookShareButton
+            url={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+            hashtag={`#${reviewData.aprasymas}`}
+            className="Demo__some-network__share-button"
+        >
+            <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        <br />
+        <TwitterShareButton
+            title={`${reviewData.aprasymas}`}
+            url={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+        >
+            <TwitterIcon size={32} round />
+        </TwitterShareButton>
+        <RedditShareButton
+            title={"My review"}
+            url={`${reviewData.aprasymas}`}
+        >
+            <RedditIcon size={32} round />
+        </RedditShareButton>
+      </Stack>      
     </div>
   );
 }
