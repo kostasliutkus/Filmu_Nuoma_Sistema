@@ -34,29 +34,40 @@ function Review() {
   if (!reviewData) {
     return <div>Loading...</div>;
   }
+  const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
 
   return (
     <div>
       <h2>Review Details</h2>
 
+
       <Stack direction="row" spacing={2}>
-        <Avatar>H</Avatar>
+        <Avatar sx={{ backgroundColor: getRandomColor() }}>{reviewData.aprasymas.charAt(0)}</Avatar>
         <Stack direction="column" spacing={0.1}>
-          <h3>{reviewData.kurejas}</h3>
-          <label>{/* Display the date or other relevant information */}</label>
+          <h3>{reviewData.fk_Klientasid}</h3>          
         </Stack>
         <Rating name="read-only" value={reviewData.ivertinimas} readOnly />
       </Stack>
       <br />
-      <p>Description: {reviewData.aprasymas}</p>
-      <p>Positive: {reviewData.teigiamas}</p>
-      <p>Negative: {reviewData.neigiamas}</p>
+      <textarea readonly rows="4" cols="50">{reviewData.aprasymas}</textarea>
+      <Stack direction="row" spacing={2}>
+        <p>Likes {reviewData.teigiamas}</p>
+        <p>Dislikes {reviewData.neigiamas}</p>
+        <Button variant="contained" color="primary">
+            Edit Review
+        </Button>
+      </Stack>
 
       {/* Add any other information you want to display */}
       
-      <Button variant="contained" color="primary">
-        Edit Review
-      </Button>
+      
     </div>
   );
 }

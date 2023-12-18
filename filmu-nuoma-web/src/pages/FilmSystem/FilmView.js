@@ -18,8 +18,8 @@ const FilmView = () => {
     const [userId, setUserId] = useState(null);
     const [username, setUsername] = useState(null);
 
-    const clickReview = () => {
-        navigate(`/Review`);
+    const clickReview = (id) => {
+        navigate(`/Review/${id}`);
     };
     const clickAddReview = () => {
         navigate(`/AddReview/${id}`);
@@ -108,7 +108,7 @@ const FilmView = () => {
                                     cursor:'pointer',
                                     },
                             }}
-                            onClick={() => clickReview()}>
+                            onClick={() => clickReview(review.id)}>
                             <Stack direction="row" spacing={2}>
                                 <Avatar sx={{ backgroundColor: getRandomColor() }}>{review.aprasymas.charAt(0)}</Avatar>
                                 <Stack direction="column" spacing={0.1}>
@@ -117,6 +117,9 @@ const FilmView = () => {
                                 <Rating name="read-only" size="large" value={1} readOnly />
                             </Stack><br></br>
                             <textarea rows="4" cols="50">{review.aprasymas}</textarea>
+                            <Stack direction="row" spacing={2}><p>Likes {review.teigiamas}</p>
+                            <p>Dislikes {review.neigiamas}</p></Stack>
+
                             <Box sx={{ bgcolor: '#c5cae9' }}> MORE</Box>                   
                         </Box>
                         ))}
