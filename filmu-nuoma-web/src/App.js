@@ -49,7 +49,7 @@ function App() {
             <Route path="/EditOrder/:id" element={<EditOrder/>} />
             <Route path="/film-view/:id" element={<FilmView/>} />
             <Route path="/AddFilm" element={<AddFilm/>} />
-            <Route path="/EditFilm" element={<EditFilm/>} />
+            <Route path="/EditFilm/:id" element={<EditFilm/>} />
             <Route path="/CreateInvoice" element={<CreateInvoice/>} />
             <Route path="/film-view/:id" element={<FilmView/>} />
             <Route path="/verify-2fa" element={<Verify2FA/>} /> 

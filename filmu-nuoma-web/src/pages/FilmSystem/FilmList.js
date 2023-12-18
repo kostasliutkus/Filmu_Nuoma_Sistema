@@ -8,10 +8,9 @@ function FilmList() {
     const [actor, setActor] = useState({});
     //atitinkamai koreguoti naudojama keiciant mygtukus
     const isPaid = false;
-
-    const isAdmin = true;
-    const goToEdit = () => {
-        navigate(`/EditFilm`);
+    const [isAdmin, setIsAdmin] = useState(true);
+    const goToEdit = (id) => {
+        navigate(`/EditFilm/${id}`);
     };
     const goToAdd = () => {
         navigate(`/AddFilm`);
@@ -19,11 +18,31 @@ function FilmList() {
     const goToMovie = (id) => {
         navigate(`/film-view/${id}`);
     };
-
+    const goHome = () =>{
+      navigate('/')
+    }
     const handleOrder = (id, movieName) => {
         navigate(`/Order/${id}?movieName=${movieName}`);
     };
-
+    const deleteMovie = async (movieId) => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/movies/${movieId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (response.ok) {
+          console.log('Movie deleted successfully');
+        } else {
+          console.error('Error deleting movie:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error deleting movie:', error);
+      }
+      goHome();
+    };
     useEffect(() => {
         const fetchMovies = async () => {
           try {
@@ -79,6 +98,12 @@ function FilmList() {
                     <th>Length</th>
                     <th>Price</th>
                     <th>Rent</th>
+                    {isAdmin && (
+                        <th>Edit</th>
+                        )}
+                    {isAdmin && (
+                    <th>Delete</th>
+                    )}
                     </tr>
                 </thead>
                 <tbody>
@@ -90,14 +115,27 @@ function FilmList() {
                         <td>{movies[movieId].trukme}</td>
                         <td>{movies[movieId].kaina}</td>
                         <td>
-                        <button className="btn" onClick={isPaid ? (() => goToMovie(movies[movieId].id)) : (() => handleOrder(movies[movieId].id, movies[movieId].pavadinimas))}>
-                        {isPaid ? (
-                            "Watch"
-                        ) : (
-                            "Order"
-                        )}
-                        </button>
+                          <button className="btn" onClick={isPaid ? (() => goToMovie(movies[movieId].id)) : (() => handleOrder(movies[movieId].id, movies[movieId].pavadinimas))}>
+                            {isPaid ? (
+                                "Watch"
+                            ) : (
+                                "Order"
+                            )}
+                          </button>
                         </td>
+                        {isAdmin && (
+                        <td>
+                            <button className="btn btn-primary" onClick={() => goToEdit(movies[movieId].id)}>
+                                Edit
+                            </button>
+                        </td>)}
+                        {isAdmin && (
+                        <td>
+                            <button className="btn btn-danger" onClick={() => deleteMovie(movies[movieId].id)}>
+                                Delete
+                            </button>
+                        </td>
+                        )}
                     </tr>
                     ))}
                 </tbody>
@@ -106,18 +144,8 @@ function FilmList() {
                 {isAdmin && (
                 <div className="grid-item">
                     <div>
-                        <h2>Movie management</h2>
-                    </div>
-
-                    <div>
                         <button className="btn btn-success" onClick={goToAdd}>
                             Add a film
-                        </button>
-                    </div>
-                    <br></br>
-                    <div>
-                        <button className="btn btn-warning" onClick={goToEdit}>
-                            Edit a film
                         </button>
                     </div>
                 </div>

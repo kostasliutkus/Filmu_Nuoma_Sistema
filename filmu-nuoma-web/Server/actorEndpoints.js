@@ -70,8 +70,21 @@ const Movie_Actor = sequelize.define('filmas_aktorius', {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+  router.get('/movie_actors/:movieId', async (req, res) => {
+    try {
+        const movieId = req.params.movieId;
+        const actorsIds = await Movie_Actor.findAll({
+          where: { fk_Filmasid: movieId },
+        });
+        res.json(actorsIds);
+    } catch (error) {
+        console.error('Error fetching actors:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
   router.get('/actors', async (req, res) => {
     try {
+      
         const actors = await Actor.findAll();
         res.json(actors);
     } catch (error) {
@@ -121,6 +134,30 @@ router.post('/movies_actors/:movieId/actors', async (req, res) => {
   } catch (error) {
       console.error('Error associating actors with movie:', error);
       res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.delete('/movie_actor/:id', async (req, res) => {
+  const movieId = req.params.id;
+  try {
+    
+    const movieactorToDelete = await Movie_Actor.findOne({
+      where: {
+          fk_Filmasid: movieId
+      },
+  });
+    if (!movieactorToDelete) {
+      return res.status(404).json({ error: 'movie actor association not found' });
+    }
+    await Movie_Actor.destroy({
+      where: {
+        fk_Filmasid: movieId,
+      },
+    });
+    await movieactorToDelete.destroy();
+    res.json({ message: 'movie actor association deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting movie actor association:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 module.exports = router;
