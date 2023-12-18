@@ -1,7 +1,7 @@
 import React from 'react';
 
 const VideoPlayer = ({ videoId, width, height }) => {
-    const src = `https://www.youtube.com/embed/${videoId}`;
+    const src = `https://www.youtube.com/embed/2DeLrLEagU0?si=X7nWfXRhAClDUfMv`;
 
     return (
         <iframe
