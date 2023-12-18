@@ -6,14 +6,17 @@ function FilmList() {
     const [movies, setMovies] = useState({});
     const [directors, setDirectors] = useState([]);
     const [actor, setActor] = useState({});
+    //atitinkamai koreguoti naudojama keiciant mygtukus
+    const isPaid = false;
 
+    const isAdmin = false;
     const goToEdit = () => {
         navigate(`/EditFilm`);
     };
     const goToAdd = () => {
         navigate(`/AddFilm`);
     };
-    const handleRowClick = (id) => {
+    const goToMovie = (id) => {
         navigate(`/film-view/${id}`);
     };
 
@@ -80,15 +83,19 @@ function FilmList() {
                 </thead>
                 <tbody>
                     {Object.keys(movies).map((movieId) => (
-                    <tr key={movieId} onClick={() => handleRowClick(movieId)}>
+                    <tr key={movieId} >
                         <td>{movies[movieId].pavadinimas}</td>
                         <td>{directors[movies[movieId]?.fk_Rezisieriusid]?.vardas +' '+ directors[movies[movieId]?.fk_Rezisieriusid]?.pavarde}</td>
                         <td>{actor[movies[movieId].id]?.vardas + ' ' + actor[movies[movieId].id]?.pavarde}</td>
                         <td>{movies[movieId].trukme}</td>
                         <td>{movies[movieId].kaina}</td>
                         <td>
-                        <button className="btn" onClick={() => handleOrder(movieId,movies[movieId].pavadinimas)}>
-                            Rent Movie
+                        <button className="btn" onClick={isPaid ? (() => goToMovie(movies[movieId].id)) : (() => handleOrder(movies[movieId].id, movies[movieId].pavadinimas))}>
+                        {isPaid ? (
+                            "Watch"
+                        ) : (
+                            "Order"
+                        )}
                         </button>
                         </td>
                     </tr>
@@ -96,15 +103,25 @@ function FilmList() {
                 </tbody>
             </table>
             <div className="grid-item">
-                <div>
-                    <h2>Movie management</h2>
+                {isAdmin && (
+                <div className="grid-item">
+                    <div>
+                        <h2>Movie management</h2>
+                    </div>
+
+                    <div>
+                        <button className="btn btn-success" onClick={goToAdd}>
+                            Add a film
+                        </button>
+                    </div>
+                    <br></br>
+                    <div>
+                        <button className="btn btn-warning" onClick={goToEdit}>
+                            Edit a film
+                        </button>
+                    </div>
                 </div>
-                <div>
-                    <button className="btn btn-success" onClick={goToAdd}>Add a film</button>
-                </div>
-                <div>
-                    <button className="btn btn-warning" onClick={goToEdit}>Edit a film</button>
-                </div>
+                )}
             </div>
         </div>
         );
