@@ -11,6 +11,7 @@ const crypto = require('crypto');
 //cia copy paste pagal savo endpoint.js faila
 const movieEndpoints = require('./movieEndpoints');
 const orderEndpoints = require('./orderEndpoints');
+const invoiceEndpoint = require('./invoiceEndpoint');
 const directorEndpoints = require('./directorEndpoints');
 const reviewEndpoints = require('./reviewEndpoints');
 const actorEndpoints = require('./actorEndpoints');
@@ -26,6 +27,7 @@ app.use(cors());
 //cia copy paste pagal savo endpoint.js faila
 app.use('/api', movieEndpoints);
 app.use('/api', orderEndpoints);
+app.use('/api', invoiceEndpoint);
 app.use('/api', directorEndpoints);
 app.use('/api', reviewEndpoints);
 app.use('/api', actorEndpoints);
