@@ -46,6 +46,24 @@ function Review() {
   const clickEditReview = () => {
     navigate(`/EditReview/${id}`);
   };
+  const clickDeleteReview = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        alert('Review deleted successfully!');
+        navigate(`/film-view/${id}`); // Navigate to the reviews page or another appropriate page
+      } else {
+        const errorMessage = await response.text();
+        alert(`Error deleting review: ${errorMessage}`);
+      }
+    } catch (error) {
+      console.error('Error deleting review:', error);
+      alert('Error deleting review. Please try again.');
+    }
+  };
 
   return (
     <div>
@@ -66,6 +84,9 @@ function Review() {
         <p>Dislikes {reviewData.neigiamas}</p>
         <Button variant="contained" color="primary" onClick={clickEditReview}>
             Edit Review
+        </Button>
+        <Button variant="contained" color="error" onClick={clickDeleteReview}>
+          Delete Review
         </Button>
       </Stack>
 

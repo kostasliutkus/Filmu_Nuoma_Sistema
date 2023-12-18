@@ -90,42 +90,25 @@ function EditReview()
     return(
         <body>
             <form>
-                <label htmlFor="ivertinimas">Rating:</label>
-                <input type="number" id="ivertinimas" name="ivertinimas" value={formData.ivertinimas} onChange={handleChange} required /><br />
-
-                <label htmlFor="aprasymas">Description:</label>
-                <textarea id="aprasymas" name="aprasymas" value={formData.aprasymas} onChange={handleChange} required></textarea><br />
-
-                <label htmlFor="teigiamas">Positive:</label>
-                <input type="number" id="teigiamas" name="teigiamas" value={formData.teigiamas} onChange={handleChange} required /><br />
-
-                <label htmlFor="neigiamas">Negative:</label>
-                <input type="number" id="neigiamas" name="neigiamas" value={formData.neigiamas} onChange={handleChange} required /><br />
-
-                <button type="button" onClick={handleEditReview}>Update Review</button>
-            </form>
-            <Stack direction="row" spacing={2}>
-            <Avatar sx={{ bgcolor: cyan[500] }}>M</Avatar>
-                <Stack direction="column" spacing={0.1}>
-                    <h3>Me</h3>
-                    <label>now</label>
+                <Stack direction="row" spacing={2}>
+                <Avatar sx={{ backgroundColor: getRandomColor() }}>{formData.aprasymas.charAt(0)}</Avatar>
+                    <Stack direction="column" spacing={0.1}>
+                        <h3>{formData.fk_Klientasid}</h3>
+                    </Stack>
+                    <Rating
+                        name="simple-controlled"
+                        size="large"
+                        value={formData.ivertinimas}
+                        onChange={handleChange}
+                    />
+                </Stack><br></br>
+                <textarea name="aprasymas" value={formData.aprasymas} onChange={handleChange} required rows="4" cols="50" placeholder="Add review...">This is my review</textarea>   
+                <br></br><br></br>
+                <Stack direction="row" spacing={5}>
+                    <Button onClick={handleEditReview}>Save review</Button>
+                    <Button >Share</Button> 
                 </Stack>
-                <Rating
-                    name="simple-controlled"
-                    size="large"
-                    value={value}
-                    onChange={(event, newValue) => {
-                    setValue(newValue);
-                    }}
-                />
-            </Stack><br></br>
-            <textarea rows="4" cols="50" placeholder="Add review...">This is my review</textarea>   
-            <br></br><br></br>
-            <Stack direction="row" spacing={5}>
-                <Button onClick={() => handleRowClick('dQw4w9WgXcQ')}>Save review</Button>
-                <Button >Share</Button> 
-            </Stack>              
-                
+            </form>
         </body> );
 }
 export default EditReview
