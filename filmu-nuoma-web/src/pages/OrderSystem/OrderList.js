@@ -7,8 +7,8 @@ function OrderList() {
     const handleRowClick = (id) => {
         navigate(`/EditOrder/${id}`);
     };
-    const goToCreateInvoice = () => {
-        navigate(`/CreateInvoice`);
+    const goToCreateInvoice = (orderID) => {
+        navigate(`/CreateInvoice/${orderID}`);
     };
     const [orderData, setOrderData] = useState({});
 
@@ -16,7 +16,6 @@ function OrderList() {
     const [userData, setUserData] = useState({});
 
     useEffect(() => {
-        // Function to fetch user data from your API
         const token = localStorage.getItem('token')
         const fetchUserData = async () => {
             try {
@@ -74,15 +73,16 @@ function OrderList() {
                     <tbody>
                         {filteredOrders.map((order) => (
                             <tr key={order.id} onClick={() => handleRowClick(order.id)}>
-                                <td>{order.uzsakytas_filmas}</td>
-                                <td>{order.kaina}</td>
-                                <td>{order.uzsakymo_data}</td>
-                                <td>{order.apmoketas}</td>
-                            </tr>
-                        ))}
-                        <tr>
-                            <td colSpan="3"><button onClick={goToCreateInvoice}>Create Invoice</button></td>
+                            <td>{order.uzsakytas_filmas}</td>
+                            <td>{order.kaina}</td>
+                            <td>{order.uzsakymo_data}</td>
+                            <td> { order.apmoketas ? "Yes" : "No"}</td>
+                            <td>
+                            <button onClick={(e) => { e.stopPropagation(); goToCreateInvoice(order.id); }}>Create Invoice</button>
+                                </td>
                         </tr>
+                        ))}
+                            
                     </tbody>
 
 
