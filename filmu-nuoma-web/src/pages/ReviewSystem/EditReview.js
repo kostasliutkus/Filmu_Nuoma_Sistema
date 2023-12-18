@@ -9,7 +9,7 @@ import {cyan} from '@mui/material/colors';
 function EditReview()
 {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { id, fId } = useParams();
     const handleRowClick = (id) => {
         navigate(`/film-view/${id}`);
     };
@@ -77,7 +77,7 @@ function EditReview()
           if (response.ok) {
             alert('Review updated successfully!');
             // Optionally, you can redirect to another page or perform other actions.
-            navigate(`/film-view/${id}`);
+            navigate(`/film-view/${fId}`);
           } else {
             const errorMessage = await response.text();
             alert(`Error updating review: ${errorMessage}`);
@@ -96,7 +96,7 @@ function EditReview()
                         <h3>{formData.fk_Klientasid}</h3>
                     </Stack>
                     <Rating
-                        name="simple-controlled"
+                        name="ivertinimas"
                         size="large"
                         value={formData.ivertinimas}
                         onChange={handleChange}

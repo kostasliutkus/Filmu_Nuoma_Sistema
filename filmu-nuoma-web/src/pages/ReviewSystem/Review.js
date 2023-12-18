@@ -46,7 +46,7 @@ function Review() {
     return color;
   };
   const clickEditReview = () => {
-    navigate(`/EditReview/${fId}/${reviewData.id}`);
+    navigate(`/EditReview/${reviewData.id}/${fId}`);
   };
   const clickDeleteReview = async () => {
     try {
