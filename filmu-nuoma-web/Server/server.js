@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const movieEndpoints = require('./movieEndpoints');
 const orderEndpoints = require('./orderEndpoints');
 const directorEndpoints = require('./directorEndpoints');
+const reviewEndpoints = require('./reviewEndpoints');
 
 const app = express();
 const PORT = 5000;
@@ -20,6 +21,7 @@ app.use(cors());
 app.use('/api', movieEndpoints);
 app.use('/api', orderEndpoints);
 app.use('/api', directorEndpoints);
+app.use('/api', reviewEndpoints);
 
 const secretKey = 'F8D3C71E8EA4E1A2CBA663272DBBA';
 const sequelize = require('./db');

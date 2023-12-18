@@ -4,7 +4,6 @@ const router = express.Router();
 const sequelize = require('./db');
 
 const Review = sequelize.define('atsiliepimas', {
-  kurejas: DataTypes.STRING,
   ivertinimas: DataTypes.INTEGER,
   aprasymas: DataTypes.STRING,
   teigiamas: DataTypes.INTEGER,
@@ -51,10 +50,9 @@ router.get('/reviews/:id', async (req, res) => {
 
 // POST a new review
 router.post('/reviews', async (req, res) => {
-  const { kurejas, ivertinimas, aprasymas, teigiamas, neigiamas, fk_Filmasid, fk_Klientasid } = req.body;
+  const { ivertinimas, aprasymas, teigiamas, neigiamas, fk_Filmasid, fk_Klientasid } = req.body;
   try {
     const newReview = await Review.create({
-      kurejas,
       ivertinimas,
       aprasymas,
       teigiamas,
@@ -71,14 +69,13 @@ router.post('/reviews', async (req, res) => {
 // PUT (update) a review by ID
 router.put('/reviews/:id', async (req, res) => {
   const reviewId = req.params.id;
-  const { kurejas, ivertinimas, aprasymas, teigiamas, neigiamas, fk_Filmasid, fk_Klientasid } = req.body;
+  const { ivertinimas, aprasymas, teigiamas, neigiamas, fk_Filmasid, fk_Klientasid } = req.body;
   try {
     const review = await Review.findByPk(reviewId);
     if (!review) {
       res.status(404).json({ error: 'Review not found' });
     } else {
       await review.update({
-        kurejas,
         ivertinimas,
         aprasymas,
         teigiamas,
