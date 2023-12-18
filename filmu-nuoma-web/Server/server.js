@@ -126,7 +126,7 @@ app.post('/api/verify-2fa', async (req, res) => {
             }
 
             const totp = new OTPAuth.TOTP({
-                issuer: "filmu-nuoma",
+                issuer: "Filmu nuoma",
                 label: "Filmu nuoma",
                 algorithm: "SHA1",
                 digits: 6,
