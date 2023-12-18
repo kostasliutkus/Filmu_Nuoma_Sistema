@@ -87,8 +87,8 @@ app.post('/api/register', async (req, res) => {
         await newUser.save();
 
         const totp = new OTPAuth.TOTP({
-            issuer: "filmu-nuoma",
-            label: "Filmu nuoma",
+            issuer: "Filmu nuoma",
+            label: newUser.slapyvardis,
             algorithm: "SHA1",
             digits: 6,
             period: 30,
@@ -127,7 +127,7 @@ app.post('/api/verify-2fa', async (req, res) => {
 
             const totp = new OTPAuth.TOTP({
                 issuer: "Filmu nuoma",
-                label: "Filmu nuoma",
+                label: user.slapyvardis,
                 algorithm: "SHA1",
                 digits: 6,
                 secret: user.twoFactorSecret,
