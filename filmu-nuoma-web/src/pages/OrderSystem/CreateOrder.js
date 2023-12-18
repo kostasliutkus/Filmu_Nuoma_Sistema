@@ -56,6 +56,11 @@ function CreateOrder() {
             setOpenRentDialog(false);
             return;
         }
+        if(price > userData.kreditas)
+        {
+            setOpenRentDialog(false);
+            return;
+        }
         setIsChecked(true);
         postOrder();
         setOpenRentDialog(false);
@@ -83,7 +88,6 @@ function CreateOrder() {
         navigate(`/FilmList`);
     };
     const formattedDate = `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`;
-    const [userData, setUserData] = useState({});
     const [orderData, setOrderData] = useState({
         apmoketas: 1,
         uzsakymo_data: formattedDate,
@@ -91,6 +95,7 @@ function CreateOrder() {
         fk_Filmasid: 0,
         fk_Klientasid: 0,
     });
+    const [userData, setUserData] = useState({});
 
 
     useEffect(() => {

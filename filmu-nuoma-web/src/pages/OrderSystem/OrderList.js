@@ -12,6 +12,31 @@ function OrderList() {
     };
     const [orderData, setOrderData] = useState({});
 
+
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        // Function to fetch user data from your API
+        const token = localStorage.getItem('token')
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/user-profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+                const data = await response.json();
+                setUserData(data); // Assuming the API returns an object with user data
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+
+
     useEffect(() => {
         // Function to fetch user data from your API
         const token = localStorage.getItem('token')
@@ -31,7 +56,7 @@ function OrderList() {
 
         fetchOrderData();
     }, []);
-
+    const filteredOrders = Object.values(orderData).filter(order => order.fk_Klientasid === userData.id);
     return (
         <html className="film-html">
             <body className="film-body">
@@ -47,12 +72,12 @@ function OrderList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.keys(orderData).map((orderId) => (
-                            <tr key={orderId} onClick={() => handleRowClick(orderId)}>
-                                <td>{orderData[orderId].uzsakytas_filmas}</td>
-                                <td>{orderData[orderId].kaina}</td>
-                                <td>{orderData[orderId].uzsakymo_data}</td>
-                                <td>{orderData[orderId].apmoketas}</td>
+                        {filteredOrders.map((order) => (
+                            <tr key={order.id} onClick={() => handleRowClick(order.id)}>
+                                <td>{order.uzsakytas_filmas}</td>
+                                <td>{order.kaina}</td>
+                                <td>{order.uzsakymo_data}</td>
+                                <td>{order.apmoketas}</td>
                             </tr>
                         ))}
                         <tr>
