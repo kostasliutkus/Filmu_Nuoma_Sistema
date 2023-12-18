@@ -9,7 +9,7 @@ function FilmList() {
     //atitinkamai koreguoti naudojama keiciant mygtukus
     const isPaid = false;
 
-    const isAdmin = false;
+    const isAdmin = true;
     const goToEdit = () => {
         navigate(`/EditFilm`);
     };
