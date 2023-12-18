@@ -87,7 +87,6 @@ CREATE TABLE Filmas
 CREATE TABLE Atsiliepimas
 (
 	id int NOT NULL AUTO_INCREMENT,
-	kurejas varchar (255) NOT NULL,
 	ivertinimas int,
 	aprasymas varchar (255),
 	teigiamas int NOT NULL,
