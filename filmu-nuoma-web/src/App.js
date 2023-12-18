@@ -47,18 +47,12 @@ function App() {
             <Route path="/film-view/:id" element={<FilmView/>} />
             <Route path="/Order/:id" element={<CreateOrder/>} />
             <Route path="/EditOrder/:id" element={<EditOrder/>} />
-            <Route path="/film-view/:id" element={<FilmView/>} />
             <Route path="/AddFilm" element={<AddFilm/>} />
             <Route path="/EditFilm/:id" element={<EditFilm/>} />
             <Route path="/CreateInvoice" element={<CreateInvoice/>} />
-<<<<<<< Updated upstream
-            <Route path="/film-view/:id" element={<FilmView/>} />
             <Route path="/verify-2fa" element={<Verify2FA/>} /> 
             <Route path="/registration-success" element={<RegistrationSuccess/>} /> 
-=======
             <Route path="/CreateInvoice/:id" element={<CreateInvoice/>} />
-            <Route path="/film-view/:id" element={<FilmView/>} /> 
->>>>>>> Stashed changes
         </Routes>
       </AuthProvider>
       </>

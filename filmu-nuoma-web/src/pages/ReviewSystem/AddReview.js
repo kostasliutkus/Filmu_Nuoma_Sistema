@@ -1,17 +1,41 @@
-import React, { useState} from "react";
+import React, { useState,useEffect} from "react";
 import  {useNavigate, useParams} from 'react-router-dom';
 import Rating from '@mui/material/Rating';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-
+import axios from "axios";
 function AddReview()
 {
     const navigate = useNavigate();
     const {id} = useParams();
+    const fkMovieId = parseInt(id, 10)
+    const [userId, setUserId] = useState([]);
+    const [userName, setUserName] = useState([]);
     const handleRowClick = (id) => {
         navigate(`/film-view/${id}`);
     };
+    useEffect(() => {
+      const fetchUserInfo = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await axios.post('http://localhost:5000/api/get-user-info', { token });
+      
+          // Assuming the response contains userId and username
+          const { userId, username } = response.data;
+      
+          console.log('User ID:', userId);
+          console.log('Username:', username);
+          setUserId(userId);
+          setUserName(username);
+          // Handle the user data as needed
+        } catch (error) {
+          console.error('Error fetching user info:', error.message);
+          // Handle the error as needed
+        }
+      };
+      fetchUserInfo();
+    }, []);
     const [formData, setFormData] = useState({
         ivertinimas: 0,
         aprasymas: '',
@@ -22,15 +46,18 @@ function AddReview()
         setFormData({
           ...formData,
           [e.target.name]: e.target.value,
-          fk_Filmasid: id,
-          fk_Klientasid: 1,
+          fk_Filmasid: fkMovieId,
+          fk_Klientasid: userId,
+          kurejas: userName,
         });
       };
+      
+      
       const handleSubmit = async () => {
         try {
             setFormData({
                 ...formData,
-                fk_Filmasid: id,
+                fk_Filmasid:fkMovieId,
                 fk_Klientasid: 1,
               });
           const response = await fetch('http://localhost:5000/api/reviews', {

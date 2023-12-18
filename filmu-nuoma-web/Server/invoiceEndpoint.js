@@ -4,7 +4,10 @@ const {DataTypes } = require('sequelize');
 const router = express.Router();
 const sequelize = require('./db');
 const Invoice = sequelize.define('israsas', {
-    id: DataTypes.INTEGER,
+    id:{
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
     pirkejas: DataTypes.STRING,
     suma: DataTypes.DOUBLE,
     aprasas: DataTypes.STRING,

@@ -96,28 +96,6 @@ function CreateInvoice() {
     const generateInvoice = () => {
         postInvoice();
 
-        const fs = require('fs');
-        const path = require('path');
-        
-        // Replace 'your-image.png' with the path to your image file
-        const imagePath = '/img/untitled.png';
-        
-        // Read the image file
-        const imageData = fs.readFileSync(imagePath);
-        
-        // Convert the image data to base64
-        const base64Image = imageData.toString('base64');
-        
-        console.log(base64Image);
-        
-
-
-
-
-
-
-
-
         const pdf = new jsPDF();
 
         pdf.setProperties({

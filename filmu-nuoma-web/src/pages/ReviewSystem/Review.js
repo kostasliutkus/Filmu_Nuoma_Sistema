@@ -75,7 +75,7 @@ function Review() {
       <Stack direction="row" spacing={2}>
         <Avatar sx={{ backgroundColor: getRandomColor() }}>{reviewData.aprasymas.charAt(0)}</Avatar>
         <Stack direction="column" spacing={0.1}>
-          <h3>{reviewData.fk_Klientasid}</h3>          
+          <h3>{reviewData.kurejas}</h3>          
         </Stack>
         <Rating name="read-only" value={reviewData.ivertinimas} readOnly />
       </Stack>
