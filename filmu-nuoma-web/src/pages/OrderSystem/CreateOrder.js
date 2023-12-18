@@ -135,11 +135,12 @@ function CreateOrder() {
                 console.log('Profile updated successfully');
                 //navigate('/OrderList');
 
-
+                const formattedDate = `${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`;
 
                 const orderchanges = {
                     ...orderData,
                     kaina: price,
+                    uzsakymo_data: formattedDate,
                     fk_Filmasid: parseInt(id),
                     fk_Klientasid: userData.id,
                 }
