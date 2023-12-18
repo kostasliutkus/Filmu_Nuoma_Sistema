@@ -17,7 +17,18 @@ const Movie = sequelize.define('filmas', {
 }, {
     timestamps: false,
   });
-
+  const Movie_Actor = sequelize.define('filmas_aktorius', {
+    fk_Aktoriusid:{
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+      fk_Filmasid:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+    },
+}, {
+    timestamps: false,
+  });
 sequelize.sync()
 .then(() => {
 console.log('Database and table synced');
@@ -116,7 +127,11 @@ router.delete('/movies/:id', async (req, res) => {
       if (!movieToDelete) {
         return res.status(404).json({ error: 'Movie not found' });
       }
-  
+      await Movie_Actor.destroy({
+        where: {
+          fk_Filmasid: movieId,
+        },
+      });
       await movieToDelete.destroy();
       res.json({ message: 'Movie deleted successfully' });
     } catch (error) {

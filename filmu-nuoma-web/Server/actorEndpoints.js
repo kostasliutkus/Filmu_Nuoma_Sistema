@@ -28,8 +28,14 @@ const Actor = sequelize.define('aktorius', {
     timestamps: false,
   });
 const Movie_Actor = sequelize.define('filmas_aktorius', {
-    fk_Aktoriusid: DataTypes.INTEGER,
-    fk_Filmasid: DataTypes.INTEGER,
+    fk_Aktoriusid:{
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+      fk_Filmasid:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+    },
 }, {
     timestamps: false,
   });
@@ -64,5 +70,57 @@ const Movie_Actor = sequelize.define('filmas_aktorius', {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+  router.get('/actors', async (req, res) => {
+    try {
+        const actors = await Actor.findAll();
+        res.json(actors);
+    } catch (error) {
+        console.error('Error fetching actors:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+router.post('/actors', async (req, res) => {
+  try {
+      if (!req.body) {
+          return res.status(400).json({ error: 'Request body is missing or empty' });
+      }
+      const newActor = await Actor.create({
+          vardas: req.body.vardas,
+          pavarde: req.body.pavarde,
+          amzius: req.body.amzius,
+          spec: req.body.spec,
+          kaskadininkas: req.body.kaskadininkas,
+          pilietybe: req.body.pilietybe,
+      });
+      res.status(201).json(newActor);
+  } catch (error) {
+      console.error('Error creating actor:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.post('/movies_actors/:movieId/actors', async (req, res) => {
+  try {
+      const movieId = req.params.movieId;
+      const actorIds = req.body.actorIds;
+      console.log('AKTOR',actorIds);
+      console.log('MOVIE',movieId);
+      // Validate if the movieId and actorIds are provided in the request body
+      if (!movieId || !actorIds || !Array.isArray(actorIds)) {
+          return res.status(400).json({ error: 'Invalid request' });
+      }
+      
+      // Associate each actor with the movie in the actor_movie table
+      await Promise.all(actorIds.map(async (actorId) => {
+          await Movie_Actor.create({
+            fk_Aktoriusid: actorId,
+            fk_Filmasid: parseInt(movieId, 10)
+          });
+      }));
 
+      res.status(200).json({ message: 'Actors associated successfully' });
+  } catch (error) {
+      console.error('Error associating actors with movie:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 module.exports = router;
