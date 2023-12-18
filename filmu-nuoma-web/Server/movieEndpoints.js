@@ -1,6 +1,5 @@
 const express = require('express');
 const {DataTypes } = require('sequelize');
-const bodyParser = require('body-parser');
 const router = express.Router();
 const sequelize = require('./db');
 const Movie = sequelize.define('filmas', {
