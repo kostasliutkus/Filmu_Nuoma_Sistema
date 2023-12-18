@@ -317,6 +317,25 @@ app.post('/api/get-user-info', (req, res) => {
     }
 });
 
+app.post('/api/get-role', (req, res) => {
+    const { token } = req.body;
+
+    if (!token) {
+        return res.status(400).json({ error: 'Token is required' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, secretKey);
+
+        const role = decoded.role;
+
+        res.json({ role });
+    } catch (error) {
+        console.error('Error decoding token:', error.message);
+        res.status(401).json({ error: 'Invalid token' });
+    }
+});
+
 app.listen(PORT, () => {
 console.log(`Server is running on port ${PORT}`);
 });
