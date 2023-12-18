@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import  {useNavigate, useParams} from 'react-router-dom';
 import Rating from '@mui/material/Rating';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 
 function Review() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [reviewData, setReviewData] = useState(null);
 
@@ -42,6 +43,9 @@ function Review() {
     }
     return color;
   };
+  const clickEditReview = () => {
+    navigate(`/EditReview/${id}`);
+  };
 
   return (
     <div>
@@ -60,7 +64,7 @@ function Review() {
       <Stack direction="row" spacing={2}>
         <p>Likes {reviewData.teigiamas}</p>
         <p>Dislikes {reviewData.neigiamas}</p>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={clickEditReview}>
             Edit Review
         </Button>
       </Stack>

@@ -23,10 +23,7 @@ const FilmView = () => {
     };
     const clickAddReview = () => {
         navigate(`/AddReview/${id}`);
-    };
-    const clickEditReview = () => {
-        navigate(`/EditReview/${id}`);
-    };
+    };    
     useEffect(() => {
         const fetchReviews = async () => {
           try {
