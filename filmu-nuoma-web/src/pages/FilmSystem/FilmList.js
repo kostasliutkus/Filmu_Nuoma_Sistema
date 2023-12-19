@@ -55,7 +55,15 @@ function FilmList() {
         };
         fetchMovies();
       }, []);
-
+    const fetchDirectorById = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/directors/${id}`);
+            const data = await response.json();
+            return(data);
+        } catch (error) {
+            console.error("Error fetching directors:", error);
+        }
+    };
     useEffect(() => {
         const fetchDirectors = async () => {
           try {
@@ -110,7 +118,8 @@ function FilmList() {
                     {Object.keys(movies).map((movieId) => (
                     <tr key={movieId} >
                         <td>{movies[movieId].pavadinimas}</td>
-                        <td>{directors[movies[movieId]?.fk_Rezisieriusid]?.vardas +' '+ directors[movies[movieId]?.fk_Rezisieriusid]?.pavarde}</td>
+                        <td>{directors[movies[movieId].fk_Rezisieriusid]?.vardas +' '+ directors[movies[movieId].fk_Rezisieriusid]?.pavarde}</td>
+                        {/*<td>{fetchDirectorById(movies[movieId].fk_Rezisieriusid).name}</td>*/}
                         <td>{actor[movies[movieId].id]?.vardas + ' ' + actor[movies[movieId].id]?.pavarde}</td>
                         <td>{movies[movieId].trukme}</td>
                         <td>{movies[movieId].kaina}</td>

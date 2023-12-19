@@ -106,7 +106,7 @@ function EditReview()
                 <br></br><br></br>
                 <Stack direction="row" spacing={5}>
                     <Button onClick={handleEditReview}>Save review</Button>
-                    <Button >Share</Button> 
+                    {/*<Button >Share</Button> */}
                 </Stack>
             </form>
         </body> );
