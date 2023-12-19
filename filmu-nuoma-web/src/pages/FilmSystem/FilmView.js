@@ -104,7 +104,7 @@ const FilmView = () => {
                             <Stack direction="row" spacing={2}>
                                 <Avatar sx={{ backgroundColor: getRandomColor() }}>{review.aprasymas.charAt(0)}</Avatar>
                                 <Stack direction="column" spacing={0.1}>
-                                    <h3>{review.kurejas}</h3>
+                                    <h3>{review.fk_Klientasid}</h3>
                                 </Stack>
                                 <Rating name="read-only" size="large" value={review.ivertinimas} readOnly />
                             </Stack><br></br>

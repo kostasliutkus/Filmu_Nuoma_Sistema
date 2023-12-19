@@ -47,8 +47,7 @@ function AddReview()
           ...formData,
           [e.target.name]: e.target.value,
           fk_Filmasid: fkMovieId,
-          fk_Klientasid: userId,
-          kurejas: userName,
+          fk_Klientasid: 1,
         });
       };
       
