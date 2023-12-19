@@ -47,7 +47,7 @@ function AddReview()
           ...formData,
           [e.target.name]: e.target.value,
           fk_Filmasid: fkMovieId,
-          fk_Klientasid: 1,
+          fk_Klientasid: userId,
         });
       };
       
@@ -57,7 +57,7 @@ function AddReview()
             setFormData({
                 ...formData,
                 fk_Filmasid:fkMovieId,
-                fk_Klientasid: 1,
+                fk_Klientasid: userId,
               });
           const response = await fetch('http://localhost:5000/api/reviews', {
             method: 'POST',
